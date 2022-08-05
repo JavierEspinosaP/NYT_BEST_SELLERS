@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.list {
+    width: 300px;
+    height: 300px;
+    margin: 30px;
+    min-width: 300px;
+    list-style: none;
+    border-style: solid;
+}
+
+ul {
+    list-style: none;
+}
