@@ -17,3 +17,10 @@
 ul {
     list-style: none;
 }
+
+.hideButton {
+    display: none;
+}
+.showButton {
+    display: block;
+}

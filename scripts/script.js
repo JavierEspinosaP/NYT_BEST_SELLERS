@@ -1,5 +1,7 @@
 
 
+let pageNumber = 0
+
 async function getLists() {
     let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/names?api-key=${key.api_key}`)
     let data = await responselist.json()
@@ -12,26 +14,35 @@ async function getLists() {
     let listsNewer = data.results.map((list) => {
         return list.newest_published_date
     })
-    console.log(listsNames);
-    console.log(listsOlder);
-    console.log(listsNewer);
 
     let updated = data.results.map((list) => {
         return list.updated
     })
 
+    //constante para paginacion, hay que pensar como implementarlo con el boton de next y para que aparezca un "previous"
 
-    for (let i = 0; i < 12; i++) {
-        setTimeout(()=>{
-        document.getElementById(`h3List${(i + 1)}`).innerHTML = listsNames[i];
-        document.getElementById(`list${i + 1}Oldest`).innerHTML = "Oldest: " + listsOlder[i];
-        document.getElementById(`list${i + 1}Newest`).innerHTML = "Newest: " + listsNewer[i];
-        document.getElementById(`list${i + 1}Updated`).innerHTML = "Updated: " + updated[i]
-        }, 1000)
+    const pages = [[0, 12],[12, 24],[24, 36],[36, 48],[48, 59]]
+
+    
+    let changePage = pages[pageNumber]
+
+
+    let position1 = changePage[0]
+    let position2 = changePage[1]
+
+
+   
+
+    for (let i = position1; i < position2; i++) {
+ 
+        document.getElementById(`h3List${(i+1)-position1}`).innerHTML = listsNames[i];
+        document.getElementById(`list${(i+1)-position1}Oldest`).innerHTML = "Oldest: " + listsOlder[i];
+        document.getElementById(`list${(i+1)-position1}Newest`).innerHTML = "Newest: " + listsNewer[i];
+        document.getElementById(`list${(i+1)-position1}Updated`).innerHTML = "Updated: " + updated[i]
+        
     }
 
-
-    // for (let i = 0; i < 3; i++) {
+{    // for (let i = 0; i < 3; i++) {
 
 
     //     let responseOneList = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${lists[i]}.json?api-key=ccKqbSWo3G6EUHxA4MQOpZJOVTa8P3FL`)
@@ -65,13 +76,44 @@ async function getLists() {
     //         }
 
 
-    //     }
+    //     }}
 
+
+
+}
 
 }
 
 getLists()
 
 
+document.getElementById('nextButton').addEventListener('click', ()=> {
+    pageNumber++
+    console.log(pageNumber);
+    if (pageNumber!=0) {
+        document.getElementById('previousButton').classList.remove('hideButton')
+        document.getElementById('previousButton').classList.add('showButton')
+    }
+    if (pageNumber == 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
+        document.getElementById('list12').classList.remove('showButton')
+        document.getElementById('list12').classList.add('hideButton')
+    }
+    getLists()
+})
 
-
+document.getElementById('previousButton').addEventListener('click', ()=> {
+    pageNumber--
+    if (pageNumber!=4) {
+        document.getElementById('nextButton').classList.remove('hideButton')
+        document.getElementById('nextButton').classList.add('showButton')
+        document.getElementById('list12').classList.remove('hideButton')
+        document.getElementById('list12').classList.add('showButton')
+    }
+    if (pageNumber == 0){
+        document.getElementById('previousButton').classList.remove('showButton')
+        document.getElementById('previousButton').classList.add('hideButton')
+    }
+    getLists()
+})
