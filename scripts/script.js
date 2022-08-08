@@ -1,10 +1,14 @@
 
 let pageNumber = 0
 
+let listsNames;
+let position1;
+let position2;
+
 async function getLists() {
     let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/names?api-key=${key.api_key}`)
     let data = await responselist.json()
-    let listsNames = data.results.map((list) => {
+    listsNames = data.results.map((list) => {
         return list.list_name_encoded
     })
     let listsOlder = data.results.map((list) => {
@@ -26,8 +30,8 @@ async function getLists() {
     let changePage = pages[pageNumber]
 
 
-    let position1 = changePage[0]
-    let position2 = changePage[1]
+    position1 = changePage[0]
+    position2 = changePage[1]
 
 
    

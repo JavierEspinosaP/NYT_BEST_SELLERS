@@ -1,3 +1,4 @@
+
 document.getElementById('nextButton').addEventListener('click', ()=> {
     pageNumber++
     console.log(pageNumber);
@@ -28,6 +29,17 @@ document.getElementById('previousButton').addEventListener('click', ()=> {
     }
     getLists()
 })
+
+let buttonNumber;
+
+async function getBooks() {
+    let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listsNames[buttonNumber]}.json?api-key=${key.api_key}`)
+    let data = await responselist.json()
+    let booksNames = data.results.books.map((book)=>{
+        return book.title
+    })
+    console.log(booksNames);
+}
 
 document.getElementById('list1Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -87,7 +99,9 @@ document.getElementById('list1Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    buttonNumber = position1
 
+    getBooks()
 })
 document.getElementById('list2Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -147,6 +161,10 @@ document.getElementById('list2Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
         document.getElementById('comeBackButton').classList.remove('hide')
+
+    buttonNumber = (position1 + 1)
+
+    getBooks()
 })
 document.getElementById('list3Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -206,6 +224,11 @@ document.getElementById('list3Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+
+    buttonNumber = (position1 + 2)
+
+    getBooks()
+
 })
 document.getElementById('list4Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -265,6 +288,10 @@ document.getElementById('list4Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+
+    buttonNumber = (position1 + 3)
+
+    getBooks()
 })
 document.getElementById('list5Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -324,6 +351,10 @@ document.getElementById('list5Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+
+    buttonNumber = (position1 + 4)
+
+    getBooks()
 })
 document.getElementById('list6Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -383,6 +414,10 @@ document.getElementById('list6Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+
+    buttonNumber = (position1 + 5)
+
+    getBooks()
 })
 document.getElementById('list7Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -442,6 +477,10 @@ document.getElementById('list7Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+
+    buttonNumber = (position1 + 6)
+
+    getBooks()
 })
 document.getElementById('list8Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -501,6 +540,10 @@ document.getElementById('list8Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+
+    buttonNumber = (position1 + 7)
+
+    getBooks()
 })
 document.getElementById('list9Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -560,6 +603,10 @@ document.getElementById('list9Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+
+    buttonNumber = (position1 + 8)
+
+    getBooks()
 })
 document.getElementById('list10Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -619,6 +666,10 @@ document.getElementById('list10Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+
+    buttonNumber = (position1 + 9)
+
+    getBooks()
 })
 document.getElementById('list11Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -678,6 +729,10 @@ document.getElementById('list11Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+
+    buttonNumber = (position1 + 10)
+
+    getBooks()
 })
 document.getElementById('list12Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -737,6 +792,10 @@ document.getElementById('list12Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+
+    buttonNumber = position2
+
+    getBooks()
 })
 document.getElementById('comeBackButton').addEventListener('click',()=>{
     document.getElementById('list1').classList.remove('hide')
