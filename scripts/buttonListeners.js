@@ -32,10 +32,8 @@ document.getElementById('previousButton').addEventListener('click', ()=> {
 
 let buttonNumber;
 let bookNumber = 0
-const books = [[0,4],[4,8],[8,12],[12,15]]
-let changeBook = books[bookNumber]
-let bookPos1 = changeBook[0]
-let bookPos2 = changeBook[1]
+
+
 
 async function getBooks() {
     
@@ -60,6 +58,10 @@ async function getBooks() {
         return amazon.amazon_product_url
     })
 
+    const books = [[0,4],[4,8],[8,12],[12,15]]
+    let changeBook = books[bookNumber]
+    let bookPos1 = changeBook[0]
+    let bookPos2 = changeBook[1]
     
     for (let i = bookPos1; i < bookPos2; i++) {
         document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = "#" + ranking[i] + " " + booksNames[i]
@@ -69,6 +71,36 @@ async function getBooks() {
         document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link a Amazon</a>`
         }
 }
+
+document.getElementById('nextButtonBooks').addEventListener('click',()=>{
+    bookNumber++
+    if (bookNumber!=0) {
+        document.getElementById('previousButtonBooks').classList.remove('hide')
+        document.getElementById('previousButtonBooks').classList.add('showButton')
+    }
+    if (bookNumber == 4) {
+        document.getElementById('nextButtonBooks').classList.remove('showButton')
+        document.getElementById('nextButtonBooks').classList.add('hide')
+        // document.getElementById('list12').classList.remove('showButton')
+        // document.getElementById('list12').classList.add('hideButton')
+    }
+    getBooks()
+})
+
+document.getElementById('previousButtonBooks').addEventListener('click', ()=> {
+    bookNumber--
+    if (pageNumber!=4) {
+        document.getElementById('nextButtonBooks').classList.remove('hide')
+        document.getElementById('nextButtonBooks').classList.add('showButton')
+        // document.getElementById('list12').classList.remove('hideButton')
+        // document.getElementById('list12').classList.add('showButton')
+    }
+    if (pageNumber == 0){
+        document.getElementById('previousButton').classList.remove('showButton')
+        document.getElementById('previousButton').classList.add('hide')
+    }
+    getBooks()
+})
 
 document.getElementById('list1Button').addEventListener('click', ()=> {
 
@@ -130,8 +162,9 @@ document.getElementById('list1Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
-    buttonNumber = position1
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
+    buttonNumber = position1
     getBooks()
 
 
@@ -194,6 +227,7 @@ document.getElementById('list2Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
         document.getElementById('comeBackButton').classList.remove('hide')
+        document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 1)
 
@@ -257,6 +291,7 @@ document.getElementById('list3Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 2)
 
@@ -321,6 +356,7 @@ document.getElementById('list4Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 3)
 
@@ -384,6 +420,7 @@ document.getElementById('list5Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 4)
 
@@ -447,6 +484,7 @@ document.getElementById('list6Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 5)
 
@@ -510,6 +548,7 @@ document.getElementById('list7Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 6)
 
@@ -573,6 +612,7 @@ document.getElementById('list8Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 7)
 
@@ -636,6 +676,7 @@ document.getElementById('list9Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 8)
 
@@ -699,6 +740,7 @@ document.getElementById('list10Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 9)
 
@@ -762,6 +804,7 @@ document.getElementById('list11Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 10)
 
@@ -825,6 +868,7 @@ document.getElementById('list12Button').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.add('hideButton')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = position2
 
@@ -874,7 +918,10 @@ document.getElementById('comeBackButton').addEventListener('click',()=>{
         document.getElementById('previousButton').classList.add('showButton')
     }
     document.getElementById('comeBackButton').classList.add('hide') 
+    document.getElementById('nextButtonBooks').classList.add('hide')
+    document.getElementById('previousButtonBooks').classList.add('hide')
 })
 
 
 
+ 
