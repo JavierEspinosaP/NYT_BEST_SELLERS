@@ -6,6 +6,7 @@
 }
 
 .list {
+    display: block;
     width: 400px;
     height: 300px;
     margin: 30px;
@@ -23,4 +24,17 @@ ul {
 }
 .showButton {
     display: block;
+}
+
+.hide{
+    display:none;
+}
+
+.book{
+    display: block;
+    width: 400px;
+    height: 600px;
+    margin: 30px;
+    min-width: 300px;
+    border-style: solid;
 }

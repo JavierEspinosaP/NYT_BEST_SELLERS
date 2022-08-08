@@ -56,3 +56,17 @@ const list9Updated = document.getElementById('list9Updated');
 const list10Updated = document.getElementById('list10Updated');
 const list11Updated = document.getElementById('list11Updated');
 const list12Updated = document.getElementById('list12Updated');
+
+
+const list1Button = document.getElementById('list1Button');
+const list2Button = document.getElementById('list2Button');
+const list3Button = document.getElementById('list3Button');
+const list4Button = document.getElementById('list4Button');
+const list5Button = document.getElementById('list5Button');
+const list6Button = document.getElementById('list6Button');
+const list7Button = document.getElementById('list7Button');
+const list8Button = document.getElementById('list8Button');
+const list9Button = document.getElementById('list9Button');
+const list10Button = document.getElementById('list10Button');
+const list11Button = document.getElementById('list11Button');
+const list12Button = document.getElementById('list12Button');
