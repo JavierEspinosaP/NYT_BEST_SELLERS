@@ -17,36 +17,24 @@ async function getLists() {
     let listsNewer = data.results.map((list) => {
         return list.newest_published_date
     })
-
     let updated = data.results.map((list) => {
         return list.updated
     })
 
-    //constante para paginacion, hay que pensar como implementarlo con el boton de next y para que aparezca un "previous"
-
     const pages = [[0, 12],[12, 24],[24, 36],[36, 48],[48, 59]]
 
-    
     let changePage = pages[pageNumber]
-
 
     position1 = changePage[0]
     position2 = changePage[1]
 
-
-   
-
     for (let i = position1; i < position2; i++) {
- 
         document.getElementById(`h3List${(i+1)-position1}`).innerHTML = listsNames[i];
         document.getElementById(`list${(i+1)-position1}Oldest`).innerHTML = "Oldest: " + listsOlder[i];
         document.getElementById(`list${(i+1)-position1}Newest`).innerHTML = "Newest: " + listsNewer[i];
-        document.getElementById(`list${(i+1)-position1}Updated`).innerHTML = "Updated: " + updated[i]
-        
+        document.getElementById(`list${(i+1)-position1}Updated`).innerHTML = "Updated: " + updated[i]  
     }
-
 }
 
 getLists()
-
 

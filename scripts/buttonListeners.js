@@ -1,7 +1,6 @@
 
 document.getElementById('nextButton').addEventListener('click', ()=> {
     pageNumber++
-    console.log(pageNumber);
     if (pageNumber!=0) {
         document.getElementById('previousButton').classList.remove('hideButton')
         document.getElementById('previousButton').classList.add('showButton')
@@ -30,18 +29,50 @@ document.getElementById('previousButton').addEventListener('click', ()=> {
     getLists()
 })
 
+
 let buttonNumber;
+let bookNumber = 0
+const books = [[0,4],[4,8],[8,12],[12,15]]
+let changeBook = books[bookNumber]
+let bookPos1 = changeBook[0]
+let bookPos2 = changeBook[1]
 
 async function getBooks() {
+    
     let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listsNames[buttonNumber]}.json?api-key=${key.api_key}`)
     let data = await responselist.json()
+    let ranking = data.results.books.map((ranking)=>{
+        return ranking.rank
+    })
     let booksNames = data.results.books.map((book)=>{
         return book.title
     })
-    console.log(booksNames);
+    let picture = data.results.books.map((pic)=>{
+        return pic.book_image
+    })
+    let weeksOnList = data.results.books.map((weeks)=>{
+        return weeks.weeks_on_list
+    })
+    let paragraph = data.results.books.map((p)=>{
+        return p.description
+    })
+    let amazon = data.results.books.map((amazon)=>{
+        return amazon.amazon_product_url
+    })
+
+    
+    for (let i = bookPos1; i < bookPos2; i++) {
+        document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = "#" + ranking[i] + " " + booksNames[i]
+        document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = `<img src="${picture[i]}" width="220" height="333">`  
+        document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + weeksOnList[i]
+        document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = paragraph[i]
+        document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link a Amazon</a>`
+        }
 }
 
 document.getElementById('list1Button').addEventListener('click', ()=> {
+
+    
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -102,6 +133,8 @@ document.getElementById('list1Button').addEventListener('click', ()=> {
     buttonNumber = position1
 
     getBooks()
+
+
 })
 document.getElementById('list2Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -842,3 +875,6 @@ document.getElementById('comeBackButton').addEventListener('click',()=>{
     }
     document.getElementById('comeBackButton').classList.add('hide') 
 })
+
+
+
