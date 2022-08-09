@@ -1,3 +1,20 @@
+
+header{
+    background-color: rgb(0, 0, 0);
+    display:flex;
+    align-items:center;
+    height: 100px;
+    justify-content: space-between;
+}
+
+header h1, header form {
+    color: #fff;
+}
+
+.formElement{
+    margin: 0 10px 0 10px;
+}
+
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -6,7 +23,10 @@
 }
 
 .list {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     width: 400px;
     height: 300px;
     margin: 30px;
@@ -16,7 +36,18 @@
 }
 
 ul {
+    display: flex;
+    flex-direction: column;
     list-style: none;
+    padding: 0
+}
+
+li {
+    margin: 10px 0 10px 0
+}
+
+.listButton {
+    margin-top: 20px;
 }
 
 .hideButton {
@@ -38,4 +69,10 @@ ul {
     margin: 30px;
     min-width: 300px;
     border-style: solid;
+}
+
+#buttonsContainer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }

@@ -20,7 +20,6 @@ document.getElementById('previousButton').addEventListener('click', ()=> {
         document.getElementById('nextButton').classList.remove('hideButton')
         document.getElementById('nextButton').classList.add('showButton')
         document.getElementById('list12').classList.remove('hideButton')
-        document.getElementById('list12').classList.add('showButton')
     }
     if (pageNumber == 0){
         document.getElementById('previousButton').classList.remove('showButton')
@@ -44,7 +43,6 @@ async function getBooks() {
     
     let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listsNames[buttonNumber]}.json?api-key=${key.api_key}`)
     let data = await responselist.json()
-
     let ranking = data.results.books.map((ranking)=>{
         return ranking.rank
     })
@@ -114,6 +112,9 @@ function changeBookPages(){
         books = [[0,4],[4,8],[8,arrBookNames.length]]
 
     }
+    if (arrBookNames.length<8) {
+        books = [[0,4],[4,arrBookNames.length]]
+    }
     let changeBook = books[bookNumber]
     let bookPos1 = changeBook[0]
     let bookPos2 = changeBook[1]
@@ -148,6 +149,16 @@ document.getElementById('nextButtonBooks').addEventListener('click',()=>{
         document.getElementById('book4').classList.remove('book')
         document.getElementById('book4').classList.add('hide')
     }
+    if (bookNumber == 1 && arrBookNames.length < 8) {
+        document.getElementById('nextButtonBooks').classList.remove('showButton')
+        document.getElementById('nextButtonBooks').classList.add('hide')
+        document.getElementById('book2').classList.remove('book')
+        document.getElementById('book2').classList.add('hide')
+        document.getElementById('book3').classList.remove('book')
+        document.getElementById('book3').classList.add('hide')
+        document.getElementById('book4').classList.remove('book')
+        document.getElementById('book4').classList.add('hide')
+    }
 
     changeBookPages()
 
@@ -166,6 +177,14 @@ document.getElementById('previousButtonBooks').addEventListener('click', ()=> {
         document.getElementById('previousButtonBooks').classList.add('hide')
     }
     if (bookNumber != 2 && arrBookNames.length < 12) {
+        document.getElementById('book3').classList.remove('hide')
+        document.getElementById('book3').classList.add('book')
+        document.getElementById('book4').classList.remove('hide')
+        document.getElementById('book4').classList.add('book')
+    }
+    if (bookNumber != 1 && arrBookNames.length < 8) {
+        document.getElementById('book2').classList.remove('hide')
+        document.getElementById('book2').classList.add('book')
         document.getElementById('book3').classList.remove('hide')
         document.getElementById('book3').classList.add('book')
         document.getElementById('book4').classList.remove('hide')
@@ -689,6 +708,7 @@ document.getElementById('list8Button').addEventListener('click', ()=> {
     buttonNumber = (position1 + 7)
 
     getBooks()
+    console.log(arrWeeks);
 })
 document.getElementById('list9Button').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')

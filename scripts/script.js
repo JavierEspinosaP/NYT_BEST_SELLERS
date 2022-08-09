@@ -13,7 +13,7 @@ async function getLists() {
     let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/names?api-key=${key.api_key}`)
     let data = await responselist.json()
     listsNames = data.results.map((list) => {
-        return list.list_name_encoded
+        return list.list_name
     })
     listsNames.map((arr)=>{
     arrListNames.push(arr)

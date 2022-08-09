@@ -12,6 +12,13 @@
 <body>
     <header>
         <h1>Best Sellers by New York Times</h1>
+        <form id="submitForm" action="#" method="POST">
+            <label class="formElement" for="email">Email</label>
+            <input class="formElement" type="email">
+            <label class="formElement" for="pass">Password</label>
+            <input class="formElement" type="password">
+            <input class="formElement" type="submit">
+        </form>
     </header>
      <main>    
         <button id="comeBackButton" class="hide">Come back</button>
@@ -22,7 +29,7 @@
                 <li id="list1Oldest">Oldest</li>
                 <li id="list1Newest">Newest</li>
                 <li id="list1Updated">Updated</li>
-                <button id="list1Button">Enter</button>
+                <button class="listButton" id="list1Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list2">
@@ -31,7 +38,7 @@
                 <li id="list2Oldest">Oldest</li>
                 <li id="list2Newest">Newest</li>
                 <li id="list2Updated">Updated</li>
-                <button id="list2Button">Enter</button>
+                <button class="listButton" id="list2Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list3">
@@ -40,7 +47,7 @@
                 <li id="list3Oldest">Oldest</li>
                 <li id="list3Newest">Newest</li>
                 <li id="list3Updated">Updated</li>
-                <button id="list3Button">Enter</button>
+                <button class="listButton" id="list3Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list4">
@@ -49,7 +56,7 @@
                 <li id="list4Oldest">Oldest</li>
                 <li id="list4Newest">Newest</li>
                 <li id="list4Updated">Updated</li>
-                <button id="list4Button">Enter</button>
+                <button class="listButton" id="list4Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list5">
@@ -58,7 +65,7 @@
                 <li id="list5Oldest">Oldest</li>
                 <li id="list5Newest">Newest</li>
                 <li id="list5Updated">Updated</li>
-                <button id="list5Button">Enter</button>
+                <button class="listButton" id="list5Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list6">
@@ -67,7 +74,7 @@
                 <li id="list6Oldest">Oldest</li>
                 <li id="list6Newest">Newest</li>
                 <li id="list6Updated">Updated</li>
-                <button id="list6Button">Enter</button>
+                <button class="listButton" id="list6Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list7">
@@ -76,7 +83,7 @@
                 <li id="list7Oldest">Oldest</li>
                 <li id="list7Newest">Newest</li>
                 <li id="list7Updated">Updated</li>
-                <button id="list7Button">Enter</button>
+                <button class="listButton" id="list7Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list8">
@@ -85,7 +92,7 @@
                 <li id="list8Oldest">Oldest</li>
                 <li id="list8Newest">Newest</li>
                 <li id="list8Updated">Updated</li>
-                <button id="list8Button">Enter</button>
+                <button class="listButton" id="list8Button">Enter</button>
             </ul>
             
         </section>
@@ -95,7 +102,7 @@
                 <li id="list9Oldest">Oldest</li>
                 <li id="list9Newest">Newest</li>
                 <li id="list9Updated">Updated</li>
-                <button id="list9Button">Enter</button>
+                <button class="listButton" id="list9Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list10">
@@ -104,7 +111,7 @@
                 <li id="list10Oldest">Oldest</li>
                 <li id="list10Newest">Newest</li>
                 <li id="list10Updated">Updated</li>
-                <button id="list10Button">Enter</button>
+                <button class="listButton" id="list10Button">Enter</button>
             </ul>
         </section>
         <section class="list" id="list11">
@@ -113,16 +120,16 @@
                 <li id="list11Oldest">Oldest</li>
                 <li id="list11Newest">Newest</li>
                 <li id="list11Updated">Updated</li>
-                <button id="list11Button">Enter</button>
+                <button class="listButton" id="list11Button">Enter</button>
             </ul>
         </section>
-        <section class="list" class="showButton" id="list12">
+        <section class="list"  id="list12">
             <h3 id="h3List12">List</h3>
             <ul>
                 <li id="list12Oldest">Oldest</li>
                 <li id="list12Newest">Newest</li>
                 <li id="list12Updated">Updated</li>
-                <button id="list12Button">Enter</button>
+                <button class="listButton" id="list12Button">Enter</button>
             </ul>
         </section>    
         <section  class="hide" id="book1">
@@ -153,17 +160,17 @@
             <p id="pBook4" class="hide">Paragraph</p>
             <div id="amazon4"></div>
         </section>
+
+    </div>
+    </main>
+
+    <footer></footer>
+    <div id="buttonsContainer">        
         <button id="previousButton" class="hideButton">Previous</button>
         <button id="nextButton" class="showButton">Next</button> 
         <button id="previousButtonBooks" class="hide">Previous Books</button>
         <button id="nextButtonBooks" class="hide">Next Books</button>   
     </div>
-    </main>
-
-
-
-
-    <footer></footer>
     <script src="./scripts/config.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/buttonListeners.js"></script>
