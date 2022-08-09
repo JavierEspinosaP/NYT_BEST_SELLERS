@@ -108,12 +108,18 @@ async function getBooks() {
 }
 
 function changeBookPages(){
-    const books = [[0,4],[4,8],[8,12],[12,15]]
+
+    let books = [[0,4],[4,8],[8,12],[12,15]]
+    if (arrBookNames.length<12) {
+        books = [[0,4],[4,8],[8,arrBookNames.length]]
+
+    }
     let changeBook = books[bookNumber]
     let bookPos1 = changeBook[0]
     let bookPos2 = changeBook[1]
     
     for (let i = bookPos1; i < bookPos2; i++) {
+
         document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = "#" + arrRanking[i] + " " + arrBookNames[i]
         document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = `<img src="${arrPictures[i]}" width="220" height="333">`  
         document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
@@ -134,8 +140,17 @@ document.getElementById('nextButtonBooks').addEventListener('click',()=>{
         document.getElementById('book4').classList.remove('book')
         document.getElementById('book4').classList.add('hide')
     }
+    if (bookNumber == 2 && arrBookNames.length < 12) {
+        document.getElementById('nextButtonBooks').classList.remove('showButton')
+        document.getElementById('nextButtonBooks').classList.add('hide')
+        document.getElementById('book3').classList.remove('book')
+        document.getElementById('book3').classList.add('hide')
+        document.getElementById('book4').classList.remove('book')
+        document.getElementById('book4').classList.add('hide')
+    }
+
     changeBookPages()
-    console.log(arrBookNames);
+
 })
 
 document.getElementById('previousButtonBooks').addEventListener('click', ()=> {
@@ -149,6 +164,12 @@ document.getElementById('previousButtonBooks').addEventListener('click', ()=> {
     if (bookNumber == 0){
         document.getElementById('previousButtonBooks').classList.remove('showButton')
         document.getElementById('previousButtonBooks').classList.add('hide')
+    }
+    if (bookNumber != 2 && arrBookNames.length < 12) {
+        document.getElementById('book3').classList.remove('hide')
+        document.getElementById('book3').classList.add('book')
+        document.getElementById('book4').classList.remove('hide')
+        document.getElementById('book4').classList.add('book')
     }
     changeBookPages()
 })
