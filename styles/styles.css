@@ -63,12 +63,21 @@ li {
 }
 
 .book{
-    display: block;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     width: 400px;
     height: 600px;
     margin: 30px;
     min-width: 300px;
     border-style: solid;
+}
+
+#pBook1, #pBook2, #pBook3, #pBook4, #weeksBook1, #weeksBook2, #weeksBook3, #weeksBook4 {
+    margin: 0 20px 0 20px;
+    font-weight: 700;
 }
 
 #buttonsContainer{
