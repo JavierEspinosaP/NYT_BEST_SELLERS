@@ -1,17 +1,17 @@
-
-header{
+header {
     background-color: rgb(0, 0, 0);
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
     height: 100px;
     justify-content: space-between;
 }
 
-header h1, header form {
+header h1,
+header form {
     color: #fff;
 }
 
-.formElement{
+.formElement {
     margin: 0 10px 0 10px;
 }
 
@@ -33,6 +33,7 @@ header h1, header form {
     min-width: 300px;
     list-style: none;
     border-style: solid;
+    border-width: 2px
 }
 
 ul {
@@ -58,11 +59,9 @@ li {
     display: block;
 }
 
-.hide{
-    display:none;
-}
 
-.book{
+
+.book {
 
     display: flex;
     flex-direction: column;
@@ -75,13 +74,78 @@ li {
     border-style: solid;
 }
 
-#pBook1, #pBook2, #pBook3, #pBook4, #weeksBook1, #weeksBook2, #weeksBook3, #weeksBook4 {
+#pBook1,
+#pBook2,
+#pBook3,
+#pBook4,
+#weeksBook1,
+#weeksBook2,
+#weeksBook3,
+#weeksBook4 {
     margin: 0 20px 0 20px;
     font-weight: 700;
 }
 
-#buttonsContainer{
+#buttonsContainer {
     display: flex;
     justify-content: center;
     align-content: center;
+}
+
+small {
+    color: #fff;
+
+}
+
+#small1 {
+    position: absolute;
+    right: 160px;
+    top: 75px;
+}
+
+#small2 {
+    position: absolute;
+    right: 100px;
+    top: 75px
+}
+
+#small2:hover {
+    color: rgb(0, 179, 255);
+    cursor: pointer;
+}
+
+section {
+    border-radius: 10px;
+    transition:0.08s;
+
+}
+
+section:hover {
+    box-shadow: rgba(255, 255, 255, 0.);
+    -webkit-box-shadow: 14px 9px 24px -7px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 14px 9px 24px -7px rgba(0, 0, 0, 0.4);
+    box-shadow: 14px 9px 24px -7px rgba(0, 0, 0, 0.4);
+}
+
+.signInContainer {
+    border-style: solid;
+    width: 350px;
+    height:500px;
+    display: flex;
+    justify-content: space-around;
+    border-radius: 10px;
+    border-width: 2px;
+    margin-top: 70px
+}
+
+#signInForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 70px;
+}
+
+.hide {
+    display: none;
 }

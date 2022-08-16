@@ -70,3 +70,9 @@ const list9Button = document.getElementById('list9Button');
 const list10Button = document.getElementById('list10Button');
 const list11Button = document.getElementById('list11Button');
 const list12Button = document.getElementById('list12Button');
+
+
+let signInEmail = document.getElementById('signInEmail')
+let signInPassword = document.getElementById('signInPassword')
+
+const small2 = document.getElementById('small2')

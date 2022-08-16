@@ -39,6 +39,44 @@ let arrWeeks = [];
 let arrParagraph = [];
 let arrAmazon = [];
 
+document.getElementById('small2').addEventListener('click', ()=> {
+    document.getElementById('list1').classList.remove('list')
+    document.getElementById('list1').classList.add('hide')
+    document.getElementById('list2').classList.remove('list')
+    document.getElementById('list2').classList.add('hide')
+    document.getElementById('list3').classList.remove('list')
+    document.getElementById('list3').classList.add('hide')
+    document.getElementById('list4').classList.remove('list')
+    document.getElementById('list4').classList.add('hide')
+    document.getElementById('list5').classList.remove('list')
+    document.getElementById('list5').classList.add('hide')
+    document.getElementById('list6').classList.remove('list')
+    document.getElementById('list6').classList.add('hide')
+    document.getElementById('list7').classList.remove('list')
+    document.getElementById('list7').classList.add('hide')
+    document.getElementById('list8').classList.remove('list')
+    document.getElementById('list8').classList.add('hide')
+    document.getElementById('list9').classList.remove('list')
+    document.getElementById('list9').classList.add('hide')
+    document.getElementById('list10').classList.remove('list')
+    document.getElementById('list10').classList.add('hide')
+    document.getElementById('list11').classList.remove('list')
+    document.getElementById('list11').classList.add('hide')
+    document.getElementById('list12').classList.remove('list')
+    document.getElementById('list12').classList.add('hide')
+    if (pageNumber!=4) {
+        document.getElementById('nextButton').classList.remove('showButton') 
+        document.getElementById('nextButton').classList.add('hideButton')  
+    }
+    if (pageNumber!=0) {
+        document.getElementById('previousButton').classList.remove('showButton')
+        document.getElementById('previousButton').classList.add('hideButton')
+    }
+    document.getElementById('signInContainer').classList.remove('hide')
+    document.getElementById('signInContainer').classList.add('signInContainer')
+
+})
+
 async function getBooks() {
     
     let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listsNames[buttonNumber]}.json?api-key=${key.api_key}`)
