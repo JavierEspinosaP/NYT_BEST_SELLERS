@@ -171,13 +171,14 @@
             <form id="signInForm" method="post">
                 <h3>Sign In</h3>
                 <label class="formElement" for="email">Email</label>
-                <input id="signInEmail" class="formElement" type="email">
+                <input id="signUpEmail" class="formElement" type="email">
                 <label  class="formElement" for="pass">Password</label>
-                <input id="signInPassword" class="formElement" type="pass">
+                <input id="signUpPassword" class="formElement" type="pass">
                 <label  class="formElement" for="password">Confirm Password</label>
                 <input id="confirmPassword" class="formElement" type="password">
                 <input class="formElement" type="submit">
             </form>
+            <button id="signUpGoogle">Click SignUp With Google</button>
         </div>
 
     </div>
@@ -190,9 +191,11 @@
         <button id="previousButtonBooks" class="hide">Previous Books</button>
         <button id="nextButtonBooks" class="hide">Next Books</button>   
     </div>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="./scripts/config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    
     <script src="./scripts/firebase.js"></script>
     <script src="./scripts/script.js"></script>
     <script src="./scripts/buttonListeners.js"></script>

@@ -3,15 +3,21 @@
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+const auth = firebase.auth()
+
+// const messaging = firebase.messaging();
 const db = firebase.firestore();// db representa mi BBDD
 
 
 
+
+
+document.getElementById('signUpGoogle').addEventListener('click',()=>{
+
+})
+
 const createUser = (user) => {
-    user = {
-    email : signInEmail.value,
-    password: signInPassword.value
-    }
+
     db.collection("users")
         .add(user)
         .then((docRef) => console.log("Document written with ID: ", docRef.id))
@@ -26,7 +32,13 @@ const createFavorite = (favorite) => {
         .catch((error) => console.error("Error adding document: ", error));
 };
 
+  
+
 document.getElementById('signInForm').addEventListener('submit', (event) => {
   event.preventDefault();
-  createUser()
-})
+  
+
+let email = document.getElementById('signUpEmail').value
+let password = document.getElementById('signUpPassword').value
+
+  })
