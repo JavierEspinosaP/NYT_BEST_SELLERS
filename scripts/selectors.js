@@ -72,6 +72,9 @@ const list11Button = document.getElementById('list11Button');
 const list12Button = document.getElementById('list12Button');
 
 
+const formContainer = document.getElementById('formContainer');
+const welcomeSection = document.getElementById('welcomeSection');
 
+const nickName = document.getElementById('nickname');
 
 const small2 = document.getElementById('small2')

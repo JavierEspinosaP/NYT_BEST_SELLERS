@@ -12,7 +12,7 @@
 <body>
     <header>
         <h1>Best Sellers by New York Times</h1>
-        <div id="formContainer">
+        <div id="formContainer" class="formContainer">
             <form id="submitForm" method="POST">
             <label class="formElement" for="email">Email</label>
             <input id="inputEmail" class="formElement" type="email">
@@ -23,7 +23,9 @@
         <small id="small1">Don't have an account yet?</small>  
         <small id="small2">Click here</small>
     </div>
+    <section id="welcomeSection" class="welcomeSection">
         
+    </section>
 
     </header>
      <main>    
@@ -170,15 +172,17 @@
         <div id="signInContainer"class="hide">
             <form id="signInForm" method="post">
                 <h3>Sign In</h3>
+                <label for="nickname">Nick Name</label>
+                <input id="nickname" type="text">
                 <label class="formElement" for="email">Email</label>
                 <input id="signUpEmail" class="formElement" type="email">
                 <label  class="formElement" for="pass">Password</label>
-                <input id="signUpPassword" class="formElement" type="pass">
+                <input id="signUpPassword" class="formElement" type="password">
                 <label  class="formElement" for="password">Confirm Password</label>
                 <input id="confirmPassword" class="formElement" type="password">
                 <input class="formElement" type="submit">
             </form>
-            <button id="signUpGoogle">Click SignUp With Google</button>
+            <button id="signUpGoogle">SignUp With Google</button>
         </div>
 
     </div>

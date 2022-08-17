@@ -125,6 +125,7 @@ section:hover {
     -webkit-box-shadow: 14px 9px 24px -7px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 14px 9px 24px -7px rgba(0, 0, 0, 0.4);
     box-shadow: 14px 9px 24px -7px rgba(0, 0, 0, 0.4);
+    background-color: rgb(201, 238, 255);
 }
 
 .signInContainer {
@@ -148,4 +149,10 @@ section:hover {
 
 .hide {
     display: none;
+}
+
+.welcomeSection{
+    display: flex;
+    color: #fff;
+    margin-right: 50px;
 }
