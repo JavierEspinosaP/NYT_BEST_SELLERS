@@ -3,10 +3,9 @@
   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth()
-
 // const messaging = firebase.messaging();
 const db = firebase.firestore();// db representa mi BBDD
+
 
 
 
@@ -40,5 +39,24 @@ document.getElementById('signInForm').addEventListener('submit', (event) => {
 
 let email = document.getElementById('signUpEmail').value
 let password = document.getElementById('signUpPassword').value
+let confirmPassword = document.getElementById('confirmPassword').value
+
+if (password === confirmPassword) {
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then(function(result) {
+    console.log(result.user.uid);
+  createUser({
+    id:result.user.uid,
+    email:result.user.email
+  });
+  
+  }).catch(function(error) {
+    console.log(error);
+  });
+
+} else {
+  alert("las contraseñas deben coincidir")
+}
+
 
   })
