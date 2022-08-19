@@ -102,9 +102,7 @@ document.getElementById('formContainer').addEventListener('submit', (event) => {
   let inputPassword = document.getElementById('inputPassword').value
 
   firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword)
-    .then(function (result) {
-      console.log(result.user.uid)
-    })
+    .then()
 
 let nickname;
 
@@ -113,24 +111,35 @@ db.collection("users").get().then(querySnapshot => {
         if (inputEmail == doc.data().email) {
           nickname = doc.data().nickname
         }
-        console.log(nickname);
-
-        let newParagraph = document.createElement('p')
-        welcomeSection.appendChild(newParagraph)
         if (nickname != undefined) {
-        let message = document.createTextNode(`Welcome ${nickname}!`);
-        newParagraph.appendChild(message)
-        }
+        welcomeSection.innerHTML= (`<p>Welcome ${nickname}!</p>`);}
+        document.getElementById('welcomeSection').classList.remove('hide')
+        document.getElementById('welcomeSection').classList.add('welcomeSection')
       })
     });
+
+  document.getElementById('small3').classList.remove('hide')
+  document.getElementById('small3').classList.add('small3')
 
   document.getElementById('formContainer').classList.remove('formContainer')
   document.getElementById('formContainer').classList.add('hide')
 
-  document.getElementById('welcomeSection').classList.remove('hide')
-  document.getElementById('welcomeSection').classList.add('welcomeSection')
-
-
 
 })
 
+
+//LOG OUT
+document.getElementById('small3').addEventListener('click',(event)=>{
+  event.preventDefault();
+  firebase.auth().signOut()
+  .then(()=>{
+  console.log("log out");
+  document.getElementById('formContainer').classList.remove('hide')
+  document.getElementById('formContainer').classList.add('formContainer')
+  document.getElementById('welcomeSection').classList.remove('welcomeSection')
+  document.getElementById('welcomeSection').classList.add('hide')
+  document.getElementById('small3').classList.remove('small3')
+  document.getElementById('small3').classList.add('hide')
+  
+})
+})  

@@ -152,8 +152,19 @@ section:hover {
 }
 
 .welcomeSection{
-    display: flex;
-    flex-direction: row;
+    position: absolute;
+    right: 100px;
     color: #fff;
     margin-right: 50px;
+}
+
+.small3{
+    margin-left:30px;
+    margin-right:50px;
+    color: #fff;
+}
+
+#small3:hover {
+    color: rgb(0, 179, 255);
+    cursor: pointer;
 }

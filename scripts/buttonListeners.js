@@ -77,14 +77,7 @@ document.getElementById('small2').addEventListener('click', ()=> {
 
 })
 
-document.getElementById('small3').addEventListener('click',()=>{
-    auth.signOut()
-    .then(()=>{
-        console.log("log out");
-        document.getElementById('formContainer').classList.remove('hide')
-        document.getElementById('formContainer').classList.add('formContainer')
-    })
-})
+
 
 async function getBooks() {
     
