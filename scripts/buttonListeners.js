@@ -72,9 +72,18 @@ document.getElementById('small2').addEventListener('click', ()=> {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
-    document.getElementById('signInContainer').classList.remove('hide')
-    document.getElementById('signInContainer').classList.add('signInContainer')
+    document.getElementById('signUpContainer').classList.remove('hide')
+    document.getElementById('signUpContainer').classList.add('signUpContainer')
 
+})
+
+document.getElementById('small3').addEventListener('click',()=>{
+    auth.signOut()
+    .then(()=>{
+        console.log("log out");
+        document.getElementById('formContainer').classList.remove('hide')
+        document.getElementById('formContainer').classList.add('formContainer')
+    })
 })
 
 async function getBooks() {

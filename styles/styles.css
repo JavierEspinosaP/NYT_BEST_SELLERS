@@ -128,7 +128,7 @@ section:hover {
     background-color: rgb(201, 238, 255);
 }
 
-.signInContainer {
+.signUpContainer {
     border-style: solid;
     width: 350px;
     height:500px;
@@ -139,7 +139,7 @@ section:hover {
     margin-top: 70px
 }
 
-#signInForm{
+#signUpForm{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -153,6 +153,7 @@ section:hover {
 
 .welcomeSection{
     display: flex;
+    flex-direction: row;
     color: #fff;
     margin-right: 50px;
 }
