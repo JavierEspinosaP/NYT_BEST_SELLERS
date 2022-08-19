@@ -4,6 +4,8 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
+let provider = new firebase.auth.GoogleAuthProvider() //SIGN IN WITH GOOGLE
+
 const createUser = (user) => {
 
   db.collection("users")
@@ -77,6 +79,9 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
         document.getElementById('welcomeSection').classList.remove('hide')
         document.getElementById('welcomeSection').classList.add('welcomeSection')
 
+        document.getElementById('small3').classList.remove('hide')
+        document.getElementById('small3').classList.add('small3')
+
         let newParagraph = document.createElement('p')
         welcomeSection.appendChild(newParagraph)
         let message = document.createTextNode(`Welcome ${document.getElementById('nickname').value}!`);
@@ -127,7 +132,6 @@ db.collection("users").get().then(querySnapshot => {
 
 })
 
-
 //LOG OUT
 document.getElementById('small3').addEventListener('click',(event)=>{
   event.preventDefault();
@@ -143,3 +147,43 @@ document.getElementById('small3').addEventListener('click',(event)=>{
   
 })
 })  
+
+//SIGN IN WITH GOOGLE
+
+document.getElementById('googleContainer').addEventListener('click',(event)=>{
+  event.preventDefault();
+
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
+  firebase.auth().signInWithPopup(provider).then(function(result) {
+
+   let user = result.user;
+   let newUser= {
+    email: user.email,
+    id: user.uid,
+    nickname: user.displayName
+   }
+
+   db.collection("users")
+   .where("email", "==", user.email)
+   .get()
+   .then((querySnapshot) => {
+     console.log("accedido a bbdd");
+     if(querySnapshot.size == 0){
+       db.collection("users")
+       .add(newUser)}
+       
+  console.log(user.displayName);
+  welcomeSection.innerHTML= (`<p>Welcome ${user.displayName}!</p>`);
+  document.getElementById('welcomeSection').classList.remove('hide')
+  document.getElementById('welcomeSection').classList.add('welcomeSection')
+    
+  document.getElementById('small3').classList.remove('hide')
+  document.getElementById('small3').classList.add('small3')
+
+  document.getElementById('formContainer').classList.remove('formContainer')
+  document.getElementById('formContainer').classList.add('hide')
+
+})})})
+

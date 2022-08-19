@@ -78,3 +78,4 @@ const welcomeSection = document.getElementById('welcomeSection');
 const nickName = document.getElementById('nickname');
 
 const small2 = document.getElementById('small2')
+
