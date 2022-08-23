@@ -249,7 +249,7 @@ await db.collection("favorites").get().then(querySnapshot => {
     })
 
 
-    const books = [[0,4],[4,8],[8,12],[12,15]]
+    const books = [[0,4],[4,8],[8,12],[12,15], [15,18], [18,21], [21,24]]
     let changeBook = books[favoriteNumber]
     let bookPos1 = changeBook[0]
     let bookPos2 = changeBook[1]

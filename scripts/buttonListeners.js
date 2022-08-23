@@ -1,8 +1,8 @@
 firebase.firestore();
 
-document.getElementById('nextButton').addEventListener('click', ()=> {
+document.getElementById('nextButton').addEventListener('click', () => {
     pageNumber++
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('hideButton')
         document.getElementById('previousButton').classList.add('showButton')
     }
@@ -15,14 +15,14 @@ document.getElementById('nextButton').addEventListener('click', ()=> {
     changePage()
 })
 
-document.getElementById('previousButton').addEventListener('click', ()=> {
+document.getElementById('previousButton').addEventListener('click', () => {
     pageNumber--
-    if (pageNumber!=4) {
+    if (pageNumber != 4) {
         document.getElementById('nextButton').classList.remove('hideButton')
         document.getElementById('nextButton').classList.add('showButton')
         document.getElementById('list12').classList.remove('hideButton')
     }
-    if (pageNumber == 0){
+    if (pageNumber == 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -34,7 +34,7 @@ let buttonNumber;
 let bookNumber = 0
 
 
-document.getElementById('small2').addEventListener('click', ()=> {
+document.getElementById('small2').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -59,11 +59,11 @@ document.getElementById('small2').addEventListener('click', ()=> {
     document.getElementById('list11').classList.add('hide')
     document.getElementById('list12').classList.remove('list')
     document.getElementById('list12').classList.add('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -85,143 +85,185 @@ document.getElementById('small2').addEventListener('click', ()=> {
 
 
 
-document.getElementById('nextButtonFavorites').addEventListener('click',()=>{
-
-     favoriteNumber++
-
-    if (favoriteNumber!=0) {
-        document.getElementById('previousButtonFavorites').classList.remove('hide')
-        document.getElementById('previousButtonFavorites').classList.add('showButton')
-    }
-    changeFavoriteBooks()
-    console.log(favoriteNumber);
-})
-
-document.getElementById('previousButtonFavorites').addEventListener('click', ()=> {
-
-    favoriteNumber--
-    
-    if (favoriteNumber == 0){
-        document.getElementById('previousButtonFavorites').classList.remove('showButton')
-        document.getElementById('previousButtonFavorites').classList.add('hide')
-    }
+document.getElementById('nextButtonFavorites').addEventListener('click', () => {
 
 
-    
-    changeFavoriteBooks()
-})
+    async function getData() {
 
 
-async function getBooks() {
-    
-    let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listsNames[buttonNumber]}.json?api-key=${key.api_key}`)
-    let data = await responselist.json()
-    let ranking = data.results.books.map((ranking)=>{
-        return ranking.rank
-    })
-
-    
-
-    ranking.map((arr)=>{
-    arrRanking.push(arr)
-    })
-
-    let booksNames = data.results.books.map((book)=>{
-        return book.title
-    })
-
-    booksNames.map((arr)=>{
-    arrBookNames.push(arr)
-    })
-
-    let picture = data.results.books.map((pic)=>{
-        return pic.book_image
-    })
-
-    picture.map((arr)=>{
-    arrPictures.push(arr)
-    })
-
-    let weeksOnList = data.results.books.map((weeks)=>{
-        return weeks.weeks_on_list
-    })
-
-    weeksOnList.map((arr)=>{
-    arrWeeks.push(arr)
-    })
-
-    let paragraph = data.results.books.map((p)=>{
-        return p.description
-    })
-
-    paragraph.map((arr)=>{
-    arrParagraph.push(arr)
-    })
-
-    let amazon = data.results.books.map((amazon)=>{
-        return amazon.amazon_product_url
-    })
-
-    amazon.map((arr)=>{
-    arrAmazon.push(arr)
-    })
-
-
-
-    const books = [[0,4],[4,8],[8,12],[12,15]]
-    let changeBook = books[bookNumber]
-    let bookPos1 = changeBook[0]
-    let bookPos2 = changeBook[1]
-    
-    for (let i = bookPos1; i < bookPos2; i++) {
-        document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = "#" + ranking[i] + " " + booksNames[i]
-        document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = `<img src="${picture[i]}" width="220" height="333">`  
-        document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + weeksOnList[i]
-        document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = paragraph[i]
-        document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link to Amazon</a>`
-        document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to favorites</p>`      
-
-        
-        }
-
-
-
-}
-
-function changeBookPages(){
-
-    const books = [[0,4],[4,8],[8,12],[12,15]]
-
-    let changeBook = books[bookNumber]
-    let bookPos1 = changeBook[0]
-    let bookPos2 = changeBook[1]
-    
-    for (let i = bookPos1; i < bookPos2; i++) {
-
-        document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = "#" + arrRanking[i] + " " + arrBookNames[i]
-        document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = `<img src="${arrPictures[i]}" width="220" height="333">`  
-        document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
-        document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = arrParagraph[i]
-        document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link a Amazon</a>`
-        document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to your favorites</p>`
-        }
-}
-
-function changeFavoriteBooks(){
-
-
-
-    async function getData(){
-    
+        favoriteNumber++
 
         let arrBookNames = [];
         let arrPictures = [];
         let arrWeeks = [];
         let arrParagraph = [];
         let arrAmazon = [];
-    
-    
-    await db.collection("users").get().then(querySnapshot => {
+
+        console.log(arrBookNames);
+        console.log(favoriteNumber);
+        await db.collection("favorites").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {
+                if (userId = doc.data().userId) {
+                    arrAmazon.push(doc.data().amazonLink);
+                    arrParagraph.push(doc.data().paragraph)
+                    arrWeeks.push(doc.data().weeksOnList)
+                    arrPictures.push(doc.data().imgBook)
+                    arrBookNames.push(doc.data().bookName)
+
+                }
+
+            })
+
+            if (favoriteNumber != 0) {
+                document.getElementById('previousButtonFavorites').classList.remove('hide')
+                document.getElementById('previousButtonFavorites').classList.add('showButton')
+            }
+
+            if(arrBookNames.length/4 == favoriteNumber) {
+                document.getElementById('nextButtonFavorites').classList.remove('showButton')
+                document.getElementById('nextButtonFavorites').classList.add('hide')
+            }
+
+           
+            
+
+        })
+    } getData()
+
+
+
+
+
+    changeFavoriteBooks()
+
+})
+
+document.getElementById('previousButtonFavorites').addEventListener('click', () => {
+
+    favoriteNumber--
+
+            if (favoriteNumber == 0) {
+                document.getElementById('previousButtonFavorites').classList.remove('showButton')
+                document.getElementById('previousButtonFavorites').classList.add('hide')
+                document.getElementById('nextButtonFavorites').classList.remove('hide')
+                document.getElementById('nextButtonFavorites').classList.add('showButton')
+            }
+          
+
+    changeFavoriteBooks()
+    })
+
+
+async function getBooks() {
+
+    let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listsNames[buttonNumber]}.json?api-key=${key.api_key}`)
+    let data = await responselist.json()
+    let ranking = data.results.books.map((ranking) => {
+        return ranking.rank
+    })
+
+
+
+    ranking.map((arr) => {
+        arrRanking.push(arr)
+    })
+
+    let booksNames = data.results.books.map((book) => {
+        return book.title
+    })
+
+    booksNames.map((arr) => {
+        arrBookNames.push(arr)
+    })
+
+    let picture = data.results.books.map((pic) => {
+        return pic.book_image
+    })
+
+    picture.map((arr) => {
+        arrPictures.push(arr)
+    })
+
+    let weeksOnList = data.results.books.map((weeks) => {
+        return weeks.weeks_on_list
+    })
+
+    weeksOnList.map((arr) => {
+        arrWeeks.push(arr)
+    })
+
+    let paragraph = data.results.books.map((p) => {
+        return p.description
+    })
+
+    paragraph.map((arr) => {
+        arrParagraph.push(arr)
+    })
+
+    let amazon = data.results.books.map((amazon) => {
+        return amazon.amazon_product_url
+    })
+
+    amazon.map((arr) => {
+        arrAmazon.push(arr)
+    })
+
+
+
+    const books = [[0, 4], [4, 8], [8, 12], [12, 15]]
+    let changeBook = books[bookNumber]
+    let bookPos1 = changeBook[0]
+    let bookPos2 = changeBook[1]
+
+    for (let i = bookPos1; i < bookPos2; i++) {
+        document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = "#" + ranking[i] + " " + booksNames[i]
+        document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = `<img src="${picture[i]}" width="220" height="333">`
+        document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + weeksOnList[i]
+        document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = paragraph[i]
+        document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link to Amazon</a>`
+        document.getElementById(`favorites${(i + 1) - bookPos1}`).innerHTML = `<p>Add to favorites</p>`
+
+
+    }
+
+
+
+}
+
+function changeBookPages() {
+
+    const books = [[0, 4], [4, 8], [8, 12], [12, 15]]
+
+    let changeBook = books[bookNumber]
+    let bookPos1 = changeBook[0]
+    let bookPos2 = changeBook[1]
+
+    for (let i = bookPos1; i < bookPos2; i++) {
+
+        document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = "#" + arrRanking[i] + " " + arrBookNames[i]
+        document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = `<img src="${arrPictures[i]}" width="220" height="333">`
+        document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
+        document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
+        document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link a Amazon</a>`
+        document.getElementById(`favorites${(i + 1) - bookPos1}`).innerHTML = `<p>Add to your favorites</p>`
+    }
+}
+
+function changeFavoriteBooks() {
+
+
+
+    async function getData() {
+
+
+        let arrBookNames = [];
+        let arrPictures = [];
+        let arrWeeks = [];
+        let arrParagraph = [];
+        let arrAmazon = [];
+
+
+        await db.collection("users").get().then(querySnapshot => {
             querySnapshot.docs.map(doc => {
                 if (inputEmail == doc.data().email) {
                     nickname = doc.data().nickname
@@ -229,43 +271,43 @@ function changeFavoriteBooks(){
                 }
             })
         })
-    
-    
-    await db.collection("favorites").get().then(querySnapshot => {
+
+
+        await db.collection("favorites").get().then(querySnapshot => {
             querySnapshot.docs.map(doc => {
                 if (userId = doc.data().userId) {
-                 arrAmazon.push(doc.data().amazonLink); 
-                 arrParagraph.push(doc.data().paragraph)  
-                 arrWeeks.push(doc.data().weeksOnList)
-                 arrPictures.push(doc.data().imgBook) 
-                 arrBookNames.push(doc.data().bookName) 
-                 
+                    arrAmazon.push(doc.data().amazonLink);
+                    arrParagraph.push(doc.data().paragraph)
+                    arrWeeks.push(doc.data().weeksOnList)
+                    arrPictures.push(doc.data().imgBook)
+                    arrBookNames.push(doc.data().bookName)
+
                 }
-                
+
             })
         })
-    
-    
-        const books = [[0,4],[4,8],[8,12],[12,15]]
+
+
+        const books = [[0, 4], [4, 8], [8, 12], [12, 15], [15,18], [18,21], [21,24]]
         let changeBook = books[favoriteNumber]
         let bookPos1 = changeBook[0]
         let bookPos2 = changeBook[1]
-        
+
         for (let i = bookPos1; i < bookPos2; i++) {
-            document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = arrBookNames[i]
-            document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = arrPictures[i] 
-            document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
-            document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = arrParagraph[i]
-            document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
-            document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to favorites</p>`      
-            }
-    } 
+            document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = arrBookNames[i]
+            document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = arrPictures[i]
+            document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
+            document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
+            document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
+            document.getElementById(`favorites${(i + 1) - bookPos1}`).innerHTML = `<p>Add to favorites</p>`
+        }
+    }
     getData()
 }
 
-document.getElementById('nextButtonBooks').addEventListener('click',()=>{
+document.getElementById('nextButtonBooks').addEventListener('click', () => {
     bookNumber++
-    if (bookNumber!=0) {
+    if (bookNumber != 0) {
         document.getElementById('previousButtonBooks').classList.remove('hide')
         document.getElementById('previousButtonBooks').classList.add('showButton')
     }
@@ -299,15 +341,15 @@ document.getElementById('nextButtonBooks').addEventListener('click',()=>{
 
 })
 
-document.getElementById('previousButtonBooks').addEventListener('click', ()=> {
+document.getElementById('previousButtonBooks').addEventListener('click', () => {
     bookNumber--
-    if (bookNumber!=3) {
+    if (bookNumber != 3) {
         document.getElementById('nextButtonBooks').classList.remove('hide')
         document.getElementById('nextButtonBooks').classList.add('showButton')
         document.getElementById('book4').classList.remove('hide')
         document.getElementById('book4').classList.add('book')
     }
-    if (bookNumber == 0){
+    if (bookNumber == 0) {
         document.getElementById('previousButtonBooks').classList.remove('showButton')
         document.getElementById('previousButtonBooks').classList.add('hide')
     }
@@ -328,9 +370,9 @@ document.getElementById('previousButtonBooks').addEventListener('click', ()=> {
     changeBookPages()
 })
 
-document.getElementById('list1Button').addEventListener('click', ()=> {
+document.getElementById('list1Button').addEventListener('click', () => {
 
-    
+
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -374,16 +416,16 @@ document.getElementById('list1Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -395,7 +437,7 @@ document.getElementById('list1Button').addEventListener('click', ()=> {
 
 
 })
-document.getElementById('list2Button').addEventListener('click', ()=> {
+document.getElementById('list2Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -439,27 +481,27 @@ document.getElementById('list2Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
-        document.getElementById('comeBackButton').classList.remove('hide')
-        document.getElementById('nextButtonBooks').classList.remove('hide')
+    document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 1)
 
     getBooks()
 })
-document.getElementById('list3Button').addEventListener('click', ()=> {
+document.getElementById('list3Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -503,20 +545,20 @@ document.getElementById('list3Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
-    document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 2)
@@ -524,7 +566,7 @@ document.getElementById('list3Button').addEventListener('click', ()=> {
     getBooks()
 
 })
-document.getElementById('list4Button').addEventListener('click', ()=> {
+document.getElementById('list4Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -568,16 +610,16 @@ document.getElementById('list4Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -588,7 +630,7 @@ document.getElementById('list4Button').addEventListener('click', ()=> {
 
     getBooks()
 })
-document.getElementById('list5Button').addEventListener('click', ()=> {
+document.getElementById('list5Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -632,16 +674,16 @@ document.getElementById('list5Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -652,7 +694,7 @@ document.getElementById('list5Button').addEventListener('click', ()=> {
 
     getBooks()
 })
-document.getElementById('list6Button').addEventListener('click', ()=> {
+document.getElementById('list6Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -696,16 +738,16 @@ document.getElementById('list6Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -716,7 +758,7 @@ document.getElementById('list6Button').addEventListener('click', ()=> {
 
     getBooks()
 })
-document.getElementById('list7Button').addEventListener('click', ()=> {
+document.getElementById('list7Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -760,16 +802,16 @@ document.getElementById('list7Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -780,7 +822,7 @@ document.getElementById('list7Button').addEventListener('click', ()=> {
 
     getBooks()
 })
-document.getElementById('list8Button').addEventListener('click', ()=> {
+document.getElementById('list8Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -824,16 +866,16 @@ document.getElementById('list8Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -845,7 +887,7 @@ document.getElementById('list8Button').addEventListener('click', ()=> {
     getBooks()
     console.log(arrWeeks);
 })
-document.getElementById('list9Button').addEventListener('click', ()=> {
+document.getElementById('list9Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -889,27 +931,27 @@ document.getElementById('list9Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
-    document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 8)
 
     getBooks()
 })
-document.getElementById('list10Button').addEventListener('click', ()=> {
+document.getElementById('list10Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -953,27 +995,27 @@ document.getElementById('list10Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
-    document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 9)
 
     getBooks()
 })
-document.getElementById('list11Button').addEventListener('click', ()=> {
+document.getElementById('list11Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -1017,27 +1059,27 @@ document.getElementById('list11Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
-    document.getElementById('comeBackButton').classList.remove('hide') 
+    document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
     buttonNumber = (position1 + 10)
 
     getBooks()
 })
-document.getElementById('list12Button').addEventListener('click', ()=> {
+document.getElementById('list12Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
     document.getElementById('list2').classList.remove('list')
@@ -1081,16 +1123,16 @@ document.getElementById('list12Button').addEventListener('click', ()=> {
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('showButton') 
-        document.getElementById('nextButton').classList.add('hideButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('showButton')
+        document.getElementById('nextButton').classList.add('hideButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('showButton')
         document.getElementById('previousButton').classList.add('hideButton')
     }
@@ -1101,7 +1143,7 @@ document.getElementById('list12Button').addEventListener('click', ()=> {
 
     getBooks()
 })
-document.getElementById('comeBackButton').addEventListener('click',()=>{
+document.getElementById('comeBackButton').addEventListener('click', () => {
     bookNumber = 0
     arrRanking = [];
     arrBookNames = [];
@@ -1143,15 +1185,15 @@ document.getElementById('comeBackButton').addEventListener('click',()=>{
     document.getElementById('book4').classList.add('hide')
 
 
-    if (pageNumber!=4) {
-        document.getElementById('nextButton').classList.remove('hideButton') 
-        document.getElementById('nextButton').classList.add('showButton')  
+    if (pageNumber != 4) {
+        document.getElementById('nextButton').classList.remove('hideButton')
+        document.getElementById('nextButton').classList.add('showButton')
     }
-    if (pageNumber!=0) {
+    if (pageNumber != 0) {
         document.getElementById('previousButton').classList.remove('hideButton')
         document.getElementById('previousButton').classList.add('showButton')
     }
-    document.getElementById('comeBackButton').classList.add('hide') 
+    document.getElementById('comeBackButton').classList.add('hide')
     document.getElementById('nextButtonBooks').classList.add('hide')
     document.getElementById('previousButtonBooks').classList.add('hide')
 
