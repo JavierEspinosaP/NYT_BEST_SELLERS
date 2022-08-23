@@ -185,5 +185,41 @@ document.getElementById('googleContainer').addEventListener('click',(event)=>{
   document.getElementById('formContainer').classList.remove('formContainer')
   document.getElementById('formContainer').classList.add('hide')
 
+  document.getElementById('list1').classList.remove('hide')
+  document.getElementById('list1').classList.add('list')
+  document.getElementById('list2').classList.remove('hide')
+  document.getElementById('list2').classList.add('list')
+  document.getElementById('list3').classList.remove('hide')
+  document.getElementById('list3').classList.add('list')
+  document.getElementById('list4').classList.remove('hide')
+  document.getElementById('list4').classList.add('list')
+  document.getElementById('list5').classList.remove('hide')
+  document.getElementById('list5').classList.add('list')
+  document.getElementById('list6').classList.remove('hide')
+  document.getElementById('list6').classList.add('list')
+  document.getElementById('list7').classList.remove('hide')
+  document.getElementById('list7').classList.add('list')
+  document.getElementById('list8').classList.remove('hide')
+  document.getElementById('list8').classList.add('list')
+  document.getElementById('list9').classList.remove('hide')
+  document.getElementById('list9').classList.add('list')
+  document.getElementById('list10').classList.remove('hide')
+  document.getElementById('list10').classList.add('list')
+  document.getElementById('list11').classList.remove('hide')
+  document.getElementById('list11').classList.add('list')
+  document.getElementById('list12').classList.remove('hide')
+  document.getElementById('list12').classList.add('list')
+  if (pageNumber != 4) {
+    document.getElementById('nextButton').classList.remove('hideButton')
+    document.getElementById('nextButton').classList.add('showButton')
+  }
+  if (pageNumber != 0) {
+    document.getElementById('previousButton').classList.remove('hideButton')
+    document.getElementById('previousButton').classList.add('showButton')
+  }
+
+  document.getElementById('signUpContainer').classList.remove('signUpContainer')
+  document.getElementById('signUpContainer').classList.add('hide')
+
 })})})
 

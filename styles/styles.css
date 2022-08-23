@@ -198,3 +198,25 @@ section:hover {
     color: rgb(0, 179, 255);
     cursor: pointer;
 }
+
+.favorites {
+    border-style: solid;
+    border-width: 1px;
+    padding:5px;
+    border-radius: 20px;
+}
+
+.favorites:hover{
+    cursor: pointer;
+}
+
+.amazon {
+    border-style: solid;
+    border-width: 1px;
+    padding:20px 5px 20px 5px;
+    border-radius: 20px;
+}
+
+.amazonfavoritesContainer{
+    display: flex;
+}

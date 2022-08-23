@@ -74,7 +74,18 @@ document.getElementById('small2').addEventListener('click', ()=> {
     }
     document.getElementById('signUpContainer').classList.remove('hide')
     document.getElementById('signUpContainer').classList.add('signUpContainer')
-
+    document.getElementById('book1').classList.remove('book')
+    document.getElementById('book1').classList.add('hide')
+    document.getElementById('book2').classList.remove('book')
+    document.getElementById('book2').classList.add('hide')
+    document.getElementById('book3').classList.remove('book')
+    document.getElementById('book3').classList.add('hide')
+    document.getElementById('book4').classList.remove('book')
+    document.getElementById('book4').classList.add('hide')
+    document.getElementById('nextButtonBooks').classList.remove('showButton')
+    document.getElementById('nextButtonBooks').classList.add('hide')
+    document.getElementById('previousButtonBooks').classList.remove('showButton')
+    document.getElementById('previousButtonBooks').classList.add('hide')
 })
 
 
@@ -141,7 +152,8 @@ async function getBooks() {
         document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = `<img src="${picture[i]}" width="220" height="333">`  
         document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + weeksOnList[i]
         document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = paragraph[i]
-        document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link a Amazon</a>`
+        document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link to Amazon</a>`
+        document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to favorites</p>`
         }
 }
 
@@ -166,6 +178,7 @@ function changeBookPages(){
         document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
         document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = arrParagraph[i]
         document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link a Amazon</a>`
+        document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to your favorites</p>`
         }
 }
 
@@ -1059,6 +1072,10 @@ document.getElementById('comeBackButton').addEventListener('click',()=>{
     document.getElementById('comeBackButton').classList.add('hide') 
     document.getElementById('nextButtonBooks').classList.add('hide')
     document.getElementById('previousButtonBooks').classList.add('hide')
+
+
+    document.getElementById('signUpContainer').classList.remove('signUpContainer')
+    document.getElementById('signUpContainer').classList.add('hide')
 })
 
 
