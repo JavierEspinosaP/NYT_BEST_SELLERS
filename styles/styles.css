@@ -183,18 +183,33 @@ section:hover {
 
 .welcomeSection{
     position: absolute;
-    right: 100px;
+    right: 200px;
     color: #fff;
     margin-right: 50px;
 }
 
 .small3{
+    position: absolute;
+    right: 0px;
     margin-left:30px;
     margin-right:50px;
     color: #fff;
 }
 
 #small3:hover {
+    color: rgb(0, 179, 255);
+    cursor: pointer;
+}
+
+.favoriteView{
+    position: absolute;
+    right: 80px;
+    margin-left:30px;
+    margin-right:50px;
+    color: #fff;
+}
+
+#favoriteView:hover {
     color: rgb(0, 179, 255);
     cursor: pointer;
 }

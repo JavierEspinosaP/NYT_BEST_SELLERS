@@ -134,6 +134,9 @@ db.collection("users").get().then(querySnapshot => {
   document.getElementById('small3').classList.remove('hide')
   document.getElementById('small3').classList.add('small3')
 
+  document.getElementById('favoriteView').classList.remove('hide')
+  document.getElementById('favoriteView').classList.add('favoriteView')
+
   document.getElementById('formContainer').classList.remove('formContainer')
   document.getElementById('formContainer').classList.add('hide')
 
@@ -229,5 +232,7 @@ document.getElementById('googleContainer').addEventListener('click',(event)=>{
   document.getElementById('signUpContainer').classList.add('hide')
 
 })})})
+
+
 
 

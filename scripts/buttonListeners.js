@@ -33,12 +33,6 @@ document.getElementById('previousButton').addEventListener('click', ()=> {
 let buttonNumber;
 let bookNumber = 0
 
-let arrRanking = [];
-let arrBookNames = [];
-let arrPictures = [];
-let arrWeeks = [];
-let arrParagraph = [];
-let arrAmazon = [];
 
 document.getElementById('small2').addEventListener('click', ()=> {
     document.getElementById('list1').classList.remove('list')
@@ -89,6 +83,33 @@ document.getElementById('small2').addEventListener('click', ()=> {
     document.getElementById('previousButtonBooks').classList.add('hide')
 })
 
+
+
+document.getElementById('nextButtonFavorites').addEventListener('click',()=>{
+
+     favoriteNumber++
+
+    if (favoriteNumber!=0) {
+        document.getElementById('previousButtonFavorites').classList.remove('hide')
+        document.getElementById('previousButtonFavorites').classList.add('showButton')
+    }
+    changeFavoriteBooks()
+    console.log(favoriteNumber);
+})
+
+document.getElementById('previousButtonFavorites').addEventListener('click', ()=> {
+
+    favoriteNumber--
+    
+    if (favoriteNumber == 0){
+        document.getElementById('previousButtonFavorites').classList.remove('showButton')
+        document.getElementById('previousButtonFavorites').classList.add('hide')
+    }
+
+
+    
+    changeFavoriteBooks()
+})
 
 
 async function getBooks() {
@@ -167,119 +188,10 @@ async function getBooks() {
 
 }
 
-
-
-
-    //ADD TO FAVORITES
-
-
-    document.getElementById('favorites1').addEventListener('click', ()=>{
-        
-        db.collection("users").get().then(querySnapshot => {
-            querySnapshot.docs.map(doc => {        
-              if (inputEmail == doc.data().email) { 
-                nickname = doc.data().nickname
-                userId = doc.data().id
-              }})})
-
-        let favorites = {
-            userId: userId,
-            bookName : document.getElementById(`h3Book1`).innerHTML,
-            imgBook: document.getElementById(`imgBook1`).innerHTML,
-            weeksOnList: document.getElementById(`weeksBook1`).innerHTML,
-            paragraph: document.getElementById(`pBook1`).innerHTML,
-            amazonLink: document.getElementById(`amazon1`).innerHTML
-        }
-
-        db.collection("favorites")
-        .add(favorites)
-        .then((docRef) => console.log("Document written with ID: ", docRef.id))
-        .catch((error) => console.error("Error adding document: ", error));
-      })  
-
-      document.getElementById('favorites2').addEventListener('click', ()=>{
-        
-        db.collection("users").get().then(querySnapshot => {
-            querySnapshot.docs.map(doc => {        
-              if (inputEmail == doc.data().email) { 
-                nickname = doc.data().nickname
-                userId = doc.data().id
-              }})})
-
-        let favorites = {
-            userId: userId,
-            bookName : document.getElementById(`h3Book2`).innerHTML,
-            imgBook: document.getElementById(`imgBook2`).innerHTML,
-            weeksOnList: document.getElementById(`weeksBook2`).innerHTML,
-            paragraph: document.getElementById(`pBook2`).innerHTML,
-            amazonLink: document.getElementById(`amazon2`).innerHTML
-        }
-
-        db.collection("favorites")
-        .add(favorites)
-        .then((docRef) => console.log("Document written with ID: ", docRef.id))
-        .catch((error) => console.error("Error adding document: ", error));
-      })  
-
-      document.getElementById('favorites3').addEventListener('click', ()=>{
-        
-        db.collection("users").get().then(querySnapshot => {
-            querySnapshot.docs.map(doc => {        
-              if (inputEmail == doc.data().email) { 
-                nickname = doc.data().nickname
-                userId = doc.data().id
-              }})})
-
-        let favorites = {
-            userId: userId,
-            bookName : document.getElementById(`h3Book3`).innerHTML,
-            imgBook: document.getElementById(`imgBook3`).innerHTML,
-            weeksOnList: document.getElementById(`weeksBook3`).innerHTML,
-            paragraph: document.getElementById(`pBook3`).innerHTML,
-            amazonLink: document.getElementById(`amazon3`).innerHTML
-        }
-
-        db.collection("favorites")
-        .add(favorites)
-        .then((docRef) => console.log("Document written with ID: ", docRef.id))
-        .catch((error) => console.error("Error adding document: ", error));
-      })  
-
-      document.getElementById('favorites4').addEventListener('click', ()=>{
-        
-        db.collection("users").get().then(querySnapshot => {
-            querySnapshot.docs.map(doc => {        
-              if (inputEmail == doc.data().email) { 
-                nickname = doc.data().nickname
-                userId = doc.data().id
-              }})})
-
-        let favorites = {
-            userId: userId,
-            bookName : document.getElementById(`h3Book4`).innerHTML,
-            imgBook: document.getElementById(`imgBook4`).innerHTML,
-            weeksOnList: document.getElementById(`weeksBook4`).innerHTML,
-            paragraph: document.getElementById(`pBook4`).innerHTML,
-            amazonLink: document.getElementById(`amazon4`).innerHTML
-        }
-
-        db.collection("favorites")
-        .add(favorites)
-        .then((docRef) => console.log("Document written with ID: ", docRef.id))
-        .catch((error) => console.error("Error adding document: ", error));
-      })  
-
-
 function changeBookPages(){
 
-    let books = [[0,4],[4,8],[8,12],[12,15]]
-    if (arrBookNames.length<12) {
-        books = [[0,4],[4,8],[8,arrBookNames.length]]
+    const books = [[0,4],[4,8],[8,12],[12,15]]
 
-    }
-    if (arrBookNames.length<8) {
-        books = [[0,4],[4,arrBookNames.length]]
-    }
     let changeBook = books[bookNumber]
     let bookPos1 = changeBook[0]
     let bookPos2 = changeBook[1]
@@ -293,6 +205,62 @@ function changeBookPages(){
         document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link a Amazon</a>`
         document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to your favorites</p>`
         }
+}
+
+function changeFavoriteBooks(){
+
+
+
+    async function getData(){
+    
+
+        let arrBookNames = [];
+        let arrPictures = [];
+        let arrWeeks = [];
+        let arrParagraph = [];
+        let arrAmazon = [];
+    
+    
+    await db.collection("users").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {
+                if (inputEmail == doc.data().email) {
+                    nickname = doc.data().nickname
+                    userId = doc.data().id
+                }
+            })
+        })
+    
+    
+    await db.collection("favorites").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {
+                if (userId = doc.data().userId) {
+                 arrAmazon.push(doc.data().amazonLink); 
+                 arrParagraph.push(doc.data().paragraph)  
+                 arrWeeks.push(doc.data().weeksOnList)
+                 arrPictures.push(doc.data().imgBook) 
+                 arrBookNames.push(doc.data().bookName) 
+                 
+                }
+                
+            })
+        })
+    
+    
+        const books = [[0,4],[4,8],[8,12],[12,15]]
+        let changeBook = books[favoriteNumber]
+        let bookPos1 = changeBook[0]
+        let bookPos2 = changeBook[1]
+        
+        for (let i = bookPos1; i < bookPos2; i++) {
+            document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = arrBookNames[i]
+            document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = arrPictures[i] 
+            document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
+            document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = arrParagraph[i]
+            document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
+            document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to favorites</p>`      
+            }
+    } 
+    getData()
 }
 
 document.getElementById('nextButtonBooks').addEventListener('click',()=>{
@@ -325,6 +293,7 @@ document.getElementById('nextButtonBooks').addEventListener('click',()=>{
         document.getElementById('book4').classList.remove('book')
         document.getElementById('book4').classList.add('hide')
     }
+    console.log(bookNumber);
 
     changeBookPages()
 
