@@ -1,3 +1,4 @@
+firebase.firestore();
 
 document.getElementById('nextButton').addEventListener('click', ()=> {
     pageNumber++
@@ -98,6 +99,8 @@ async function getBooks() {
         return ranking.rank
     })
 
+    
+
     ranking.map((arr)=>{
     arrRanking.push(arr)
     })
@@ -142,6 +145,8 @@ async function getBooks() {
     arrAmazon.push(arr)
     })
 
+
+
     const books = [[0,4],[4,8],[8,12],[12,15]]
     let changeBook = books[bookNumber]
     let bookPos1 = changeBook[0]
@@ -153,9 +158,117 @@ async function getBooks() {
         document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + weeksOnList[i]
         document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = paragraph[i]
         document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link to Amazon</a>`
-        document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to favorites</p>`
+        document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to favorites</p>`      
+
+        
         }
+
+
+
 }
+
+
+
+
+    //ADD TO FAVORITES
+
+
+    document.getElementById('favorites1').addEventListener('click', ()=>{
+        
+        db.collection("users").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {        
+              if (inputEmail == doc.data().email) { 
+                nickname = doc.data().nickname
+                userId = doc.data().id
+              }})})
+
+        let favorites = {
+            userId: userId,
+            bookName : document.getElementById(`h3Book1`).innerHTML,
+            imgBook: document.getElementById(`imgBook1`).innerHTML,
+            weeksOnList: document.getElementById(`weeksBook1`).innerHTML,
+            paragraph: document.getElementById(`pBook1`).innerHTML,
+            amazonLink: document.getElementById(`amazon1`).innerHTML
+        }
+
+        db.collection("favorites")
+        .add(favorites)
+        .then((docRef) => console.log("Document written with ID: ", docRef.id))
+        .catch((error) => console.error("Error adding document: ", error));
+      })  
+
+      document.getElementById('favorites2').addEventListener('click', ()=>{
+        
+        db.collection("users").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {        
+              if (inputEmail == doc.data().email) { 
+                nickname = doc.data().nickname
+                userId = doc.data().id
+              }})})
+
+        let favorites = {
+            userId: userId,
+            bookName : document.getElementById(`h3Book2`).innerHTML,
+            imgBook: document.getElementById(`imgBook2`).innerHTML,
+            weeksOnList: document.getElementById(`weeksBook2`).innerHTML,
+            paragraph: document.getElementById(`pBook2`).innerHTML,
+            amazonLink: document.getElementById(`amazon2`).innerHTML
+        }
+
+        db.collection("favorites")
+        .add(favorites)
+        .then((docRef) => console.log("Document written with ID: ", docRef.id))
+        .catch((error) => console.error("Error adding document: ", error));
+      })  
+
+      document.getElementById('favorites3').addEventListener('click', ()=>{
+        
+        db.collection("users").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {        
+              if (inputEmail == doc.data().email) { 
+                nickname = doc.data().nickname
+                userId = doc.data().id
+              }})})
+
+        let favorites = {
+            userId: userId,
+            bookName : document.getElementById(`h3Book3`).innerHTML,
+            imgBook: document.getElementById(`imgBook3`).innerHTML,
+            weeksOnList: document.getElementById(`weeksBook3`).innerHTML,
+            paragraph: document.getElementById(`pBook3`).innerHTML,
+            amazonLink: document.getElementById(`amazon3`).innerHTML
+        }
+
+        db.collection("favorites")
+        .add(favorites)
+        .then((docRef) => console.log("Document written with ID: ", docRef.id))
+        .catch((error) => console.error("Error adding document: ", error));
+      })  
+
+      document.getElementById('favorites4').addEventListener('click', ()=>{
+        
+        db.collection("users").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {        
+              if (inputEmail == doc.data().email) { 
+                nickname = doc.data().nickname
+                userId = doc.data().id
+              }})})
+
+        let favorites = {
+            userId: userId,
+            bookName : document.getElementById(`h3Book4`).innerHTML,
+            imgBook: document.getElementById(`imgBook4`).innerHTML,
+            weeksOnList: document.getElementById(`weeksBook4`).innerHTML,
+            paragraph: document.getElementById(`pBook4`).innerHTML,
+            amazonLink: document.getElementById(`amazon4`).innerHTML
+        }
+
+        db.collection("favorites")
+        .add(favorites)
+        .then((docRef) => console.log("Document written with ID: ", docRef.id))
+        .catch((error) => console.error("Error adding document: ", error));
+      })  
+
 
 function changeBookPages(){
 
@@ -1080,4 +1193,3 @@ document.getElementById('comeBackButton').addEventListener('click',()=>{
 
 
 
- 

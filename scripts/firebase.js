@@ -22,6 +22,8 @@ const createFavorite = (favorite) => {
     .catch((error) => console.error("Error adding document: ", error));
 };
 
+
+
 // SIGN UP 
 document.getElementById('signUpForm').addEventListener('submit', (event) => {
   event.preventDefault();
@@ -99,6 +101,8 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
 })
 
 // SIGN IN
+let userId;
+
 
 document.getElementById('formContainer').addEventListener('submit', (event) => {
   event.preventDefault()
@@ -111,18 +115,22 @@ document.getElementById('formContainer').addEventListener('submit', (event) => {
 
 let nickname;
 
+
+
 db.collection("users").get().then(querySnapshot => {
       querySnapshot.docs.map(doc => {
         if (inputEmail == doc.data().email) {
           nickname = doc.data().nickname
+          userId = doc.data().id
         }
         if (nickname != undefined) {
         welcomeSection.innerHTML= (`<p>Welcome ${nickname}!</p>`);}
         document.getElementById('welcomeSection').classList.remove('hide')
         document.getElementById('welcomeSection').classList.add('welcomeSection')
       })
+      
     });
-
+  
   document.getElementById('small3').classList.remove('hide')
   document.getElementById('small3').classList.add('small3')
 
@@ -169,12 +177,11 @@ document.getElementById('googleContainer').addEventListener('click',(event)=>{
    .where("email", "==", user.email)
    .get()
    .then((querySnapshot) => {
-     console.log("accedido a bbdd");
      if(querySnapshot.size == 0){
        db.collection("users")
        .add(newUser)}
        
-  console.log(user.displayName);
+  console.log(user.uid);
   welcomeSection.innerHTML= (`<p>Welcome ${user.displayName}!</p>`);
   document.getElementById('welcomeSection').classList.remove('hide')
   document.getElementById('welcomeSection').classList.add('welcomeSection')
@@ -222,4 +229,5 @@ document.getElementById('googleContainer').addEventListener('click',(event)=>{
   document.getElementById('signUpContainer').classList.add('hide')
 
 })})})
+
 
