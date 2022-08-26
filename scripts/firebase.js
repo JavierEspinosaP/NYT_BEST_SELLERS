@@ -103,6 +103,8 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
 // SIGN IN
 let userId;
 
+let signInContainer = document.getElementById('formContainer')
+
 
 document.getElementById('formContainer').addEventListener('submit', (event) => {
   event.preventDefault()
@@ -110,14 +112,11 @@ document.getElementById('formContainer').addEventListener('submit', (event) => {
   let inputEmail = document.getElementById('inputEmail').value
   let inputPassword = document.getElementById('inputPassword').value
 
+
   firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword)
-    .then()
-
-let nickname;
-
-
-
-db.collection("users").get().then(querySnapshot => {
+    .then(userCredentials => {
+      if (userCredentials.operationType === "signIn") {
+        db.collection("users").get().then(querySnapshot => {
       querySnapshot.docs.map(doc => {
         if (inputEmail == doc.data().email) {
           nickname = doc.data().nickname
@@ -127,9 +126,7 @@ db.collection("users").get().then(querySnapshot => {
         welcomeSection.innerHTML= (`<p>Welcome ${nickname}!</p>`);}
         document.getElementById('welcomeSection').classList.remove('hide')
         document.getElementById('welcomeSection').classList.add('welcomeSection')
-      })
-      
-    });
+      })});
   
   document.getElementById('small3').classList.remove('hide')
   document.getElementById('small3').classList.add('small3')
@@ -139,6 +136,15 @@ db.collection("users").get().then(querySnapshot => {
 
   document.getElementById('formContainer').classList.remove('formContainer')
   document.getElementById('formContainer').classList.add('hide')
+  
+      
+      }
+    }
+    )
+
+    
+
+
 
 
 })
@@ -155,7 +161,8 @@ document.getElementById('small3').addEventListener('click',(event)=>{
   document.getElementById('welcomeSection').classList.add('hide')
   document.getElementById('small3').classList.remove('small3')
   document.getElementById('small3').classList.add('hide')
-  
+  document.getElementById('favoriteView').classList.remove('favoriteView')
+  document.getElementById('favoriteView').classList.add('hide')
 })
 })  
 

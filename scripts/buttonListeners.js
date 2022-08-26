@@ -81,17 +81,18 @@ document.getElementById('small2').addEventListener('click', () => {
     document.getElementById('nextButtonBooks').classList.add('hide')
     document.getElementById('previousButtonBooks').classList.remove('showButton')
     document.getElementById('previousButtonBooks').classList.add('hide')
+    document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('comeBackButton').classList.remove('showButton')
+
 })
 
 
+        
 
 document.getElementById('nextButtonFavorites').addEventListener('click', () => {
 
 
     async function getData() {
-
-
-        favoriteNumber++
 
         let arrBookNames = [];
         let arrPictures = [];
@@ -99,8 +100,11 @@ document.getElementById('nextButtonFavorites').addEventListener('click', () => {
         let arrParagraph = [];
         let arrAmazon = [];
 
-        console.log(arrBookNames);
-        console.log(favoriteNumber);
+
+
+        favoriteNumber++
+
+
         await db.collection("favorites").get().then(querySnapshot => {
             querySnapshot.docs.map(doc => {
                 if (userId = doc.data().userId) {
@@ -142,12 +146,44 @@ document.getElementById('previousButtonFavorites').addEventListener('click', () 
 
     favoriteNumber--
 
+    async function getData() {
+
+        let arrBookNames = [];
+        let arrPictures = [];
+        let arrWeeks = [];
+        let arrParagraph = [];
+        let arrAmazon = [];
+
+
+
+        await db.collection("favorites").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {
+                if (userId = doc.data().userId) {
+                    arrAmazon.push(doc.data().amazonLink);
+                    arrParagraph.push(doc.data().paragraph)
+                    arrWeeks.push(doc.data().weeksOnList)
+                    arrPictures.push(doc.data().imgBook)
+                    arrBookNames.push(doc.data().bookName)
+
+                }
+
+            })
+
             if (favoriteNumber == 0) {
                 document.getElementById('previousButtonFavorites').classList.remove('showButton')
                 document.getElementById('previousButtonFavorites').classList.add('hide')
                 document.getElementById('nextButtonFavorites').classList.remove('hide')
                 document.getElementById('nextButtonFavorites').classList.add('showButton')
+            } 
+            if(arrBookNames.length/4 != favoriteNumber) {
+                document.getElementById('nextButtonFavorites').classList.remove('hide')
+                document.getElementById('nextButtonFavorites').classList.add('showButton')
             }
+
+        })
+    } getData()
+
+
           
 
     changeFavoriteBooks()

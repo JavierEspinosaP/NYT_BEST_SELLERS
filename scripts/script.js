@@ -97,7 +97,19 @@ document.getElementById('favorites1').addEventListener('click', () => {
 
     let bookName = document.getElementById(`h3Book1`).innerHTML
 
-    let favorites = {
+    let arrBookNameFind = []  
+
+    db.collection("favorites").get().then(querySnapshot => {
+     
+
+    querySnapshot.docs.map(doc => {
+
+    arrBookNameFind.push(doc.data().bookName)
+
+        })
+    })
+
+        let favorites = {
         userId: userId,
         bookName: bookName.slice(3),
         imgBook: document.getElementById(`imgBook1`).innerHTML,
@@ -106,12 +118,25 @@ document.getElementById('favorites1').addEventListener('click', () => {
         amazonLink: document.getElementById(`amazon1`).innerHTML
     }
 
-    if (userId != undefined) {
+    if (!arrBookNameFind.indexOf(favorites.bookName) === -1){
+        if (inputEmail == doc.data().email) {
+        nickname = doc.data().nickname
+        userId = doc.data().id
+
+        if (userId != undefined) {
         db.collection("favorites")
             .add(favorites)
             .then((docRef) => console.log("Document written with ID: ", docRef.id))
             .catch((error) => console.error("Error adding document: ", error));
+        }        
     }
+
+    } else{
+        console.log("book is already on favorites");
+    }
+
+
+
 
 
 })
