@@ -81,6 +81,10 @@ document.getElementById('small2').addEventListener('click', () => {
     document.getElementById('nextButtonBooks').classList.add('hide')
     document.getElementById('previousButtonBooks').classList.remove('showButton')
     document.getElementById('previousButtonBooks').classList.add('hide')
+    document.getElementById('nextButtonFavorites').classList.remove('showButton')
+    document.getElementById('nextButtonFavorites').classList.add('hide')
+    document.getElementById('previousButtonFavorites').classList.remove('showButton')
+    document.getElementById('previousButtonFavorites').classList.add('hide')
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('comeBackButton').classList.remove('showButton')
 
@@ -1219,8 +1223,7 @@ document.getElementById('comeBackButton').addEventListener('click', () => {
     document.getElementById('book3').classList.add('hide')
     document.getElementById('book4').classList.remove('book')
     document.getElementById('book4').classList.add('hide')
-
-
+console.log(pageNumber);
     if (pageNumber != 4) {
         document.getElementById('nextButton').classList.remove('hideButton')
         document.getElementById('nextButton').classList.add('showButton')
