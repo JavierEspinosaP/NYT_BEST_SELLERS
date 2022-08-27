@@ -241,7 +241,7 @@ document.getElementById('favoriteView').addEventListener('click', () => {
 
 
 
-
+    favoriteNumber = 0
 
     async function getData() {
 
@@ -287,11 +287,22 @@ document.getElementById('favoriteView').addEventListener('click', () => {
         let bookPos2 = changeBook[1]
 
         for (let i = bookPos1; i < bookPos2; i++) {
+            if (arrBookNames[i] != undefined) {
             document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = arrBookNames[i]
             document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = arrPictures[i]
             document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
             document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
-            document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
+            document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank" style="text-decoration:none; color:#fff">Link to Amazon</a>` 
+            }
+            else{
+                document.getElementById(`book${(i + 1)}`).classList.remove('book')
+                document.getElementById(`book${(i + 1)}`).classList.add('hide')
+            }
+
+        }
+        if (arrBookNames.length < 4) {
+            document.getElementById('nextButtonFavorites').classList.remove('showButton')
+            document.getElementById('nextButtonFavorites').classList.add('hide')
         }
     }
     getData()
@@ -346,6 +357,8 @@ document.getElementById('favoriteView').addEventListener('click', () => {
     document.getElementById('pBook4').classList.remove('hide')
     document.getElementById('nextButton').classList.remove('showButton')
     document.getElementById('nextButton').classList.add('hide')
+    // document.getElementById('previousButton').classList.remove('showButton')
+    // document.getElementById('previousButton').classList.add('hide')
 
 
     if (favoriteNumber != 4) {
@@ -363,6 +376,10 @@ document.getElementById('favoriteView').addEventListener('click', () => {
     document.getElementById('favorites2').classList.remove('favorites')
     document.getElementById('favorites3').classList.remove('favorites')
     document.getElementById('favorites4').classList.remove('favorites')
+    document.getElementById('favorites1').classList.add('hide')
+    document.getElementById('favorites2').classList.remove('hide')
+    document.getElementById('favorites3').classList.remove('hide')
+    document.getElementById('favorites4').classList.remove('hide')
 
 
 })

@@ -263,7 +263,7 @@ async function getBooks() {
         document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = `<img src="${picture[i]}" width="220" height="333">`
         document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + weeksOnList[i]
         document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = paragraph[i]
-        document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank">Link to Amazon</a>`
+        document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${amazon[i]}' target="_blank" style="text-decoration:none; color:#fff">Link to Amazon</a>`
         document.getElementById(`favorites${(i + 1) - bookPos1}`).innerHTML = `<p>Add to favorites</p>`
 
 
@@ -287,8 +287,8 @@ function changeBookPages() {
         document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = `<img src="${arrPictures[i]}" width="220" height="333">`
         document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
         document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
-        document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link a Amazon</a>`
-        document.getElementById(`favorites${(i + 1) - bookPos1}`).innerHTML = `<p>Add to your favorites</p>`
+        document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank" style="text-decoration:none; color:#fff">Link to Amazon</a>`
+        document.getElementById(`favorites${(i + 1) - bookPos1}`).innerHTML = `<p>Add to favorites</p>`
     }
 }
 
@@ -341,11 +341,17 @@ function changeFavoriteBooks() {
         let bookPos2 = changeBook[1]
 
         for (let i = bookPos1; i < bookPos2; i++) {
-            document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = arrBookNames[i]
-            document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = arrPictures[i]
-            document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
-            document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
-            document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
+            if (arrBookNames[i] != undefined) {
+                document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = arrBookNames[i]
+                document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = arrPictures[i]
+                document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
+                document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
+                document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank" style="text-decoration:none; color:#fff">Link to Amazon</a>` 
+                }
+            else{
+                document.getElementById(`book${(i + 1)}`).classList.remove('book')
+                document.getElementById(`book${(i + 1)}`).classList.add('hide')
+            }
         }
     }
     getData()
@@ -381,7 +387,6 @@ document.getElementById('nextButtonBooks').addEventListener('click', () => {
         document.getElementById('book4').classList.remove('book')
         document.getElementById('book4').classList.add('hide')
     }
-    console.log(bookNumber);
 
     changeBookPages()
 
@@ -478,6 +483,18 @@ document.getElementById('list1Button').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
+
+
     buttonNumber = position1
     getBooks()
 
@@ -543,6 +560,17 @@ document.getElementById('list2Button').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
+
     buttonNumber = (position1 + 1)
 
     getBooks()
@@ -606,6 +634,17 @@ document.getElementById('list3Button').addEventListener('click', () => {
     }
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
+
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
 
     buttonNumber = (position1 + 2)
 
@@ -672,6 +711,17 @@ document.getElementById('list4Button').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
+
     buttonNumber = (position1 + 3)
 
     getBooks()
@@ -735,6 +785,17 @@ document.getElementById('list5Button').addEventListener('click', () => {
     }
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
+
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
 
     buttonNumber = (position1 + 4)
 
@@ -800,6 +861,17 @@ document.getElementById('list6Button').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
+
     buttonNumber = (position1 + 5)
 
     getBooks()
@@ -864,6 +936,17 @@ document.getElementById('list7Button').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
+
     buttonNumber = (position1 + 6)
 
     getBooks()
@@ -927,6 +1010,17 @@ document.getElementById('list8Button').addEventListener('click', () => {
     }
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
+
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
 
     buttonNumber = (position1 + 7)
 
@@ -993,6 +1087,17 @@ document.getElementById('list9Button').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
+
     buttonNumber = (position1 + 8)
 
     getBooks()
@@ -1056,6 +1161,17 @@ document.getElementById('list10Button').addEventListener('click', () => {
     }
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
+
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
 
     buttonNumber = (position1 + 9)
 
@@ -1121,6 +1237,17 @@ document.getElementById('list11Button').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
 
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
+
     buttonNumber = (position1 + 10)
 
     getBooks()
@@ -1184,6 +1311,16 @@ document.getElementById('list12Button').addEventListener('click', () => {
     }
     document.getElementById('comeBackButton').classList.remove('hide')
     document.getElementById('nextButtonBooks').classList.remove('hide')
+
+        document.getElementById('favorites1').classList.remove('hide')
+        document.getElementById('favorites2').classList.remove('hide')
+        document.getElementById('favorites3').classList.remove('hide')
+        document.getElementById('favorites4').classList.remove('hide')
+        document.getElementById('favorites1').classList.add('favorites')
+        document.getElementById('favorites2').classList.add('favorites')
+        document.getElementById('favorites3').classList.add('favorites')
+        document.getElementById('favorites4').classList.add('favorites')
+    
 
     buttonNumber = position2
 

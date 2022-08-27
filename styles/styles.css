@@ -108,7 +108,7 @@ small {
 
 #small1 {
     position: absolute;
-    right: 160px;
+    right: 170px;
     top: 75px;
 }
 
@@ -262,6 +262,9 @@ section button:hover {
 }
 
 .favorites {
+    background-color:rgb(0, 0, 0);
+    color: #fff;
+    height: 50px;
     border-style: solid;
     border-width: 1px;
     padding:5px;
@@ -270,13 +273,24 @@ section button:hover {
 
 .favorites:hover{
     cursor: pointer;
+    background-color:rgb(32, 65, 119)
 }
 
 .amazon {
+    
+    background-color: rgb(0, 0, 0);
+    color: inherit;
+    height: 20px;
     border-style: solid;
     border-width: 1px;
     padding:20px 5px 20px 5px;
     border-radius: 20px;
+    transition: 0.2s
+}
+
+.amazon:hover{
+    cursor: pointer;
+    background-color:rgb(32, 65, 119)
 }
 
 .amazonfavoritesContainer{
@@ -303,7 +317,7 @@ section button:hover {
     .googleContainer2 {
         background-color:#fff;
         position: absolute;
-        top:180px;
+        top:170px;
         left: 10px
     }
 
@@ -313,7 +327,7 @@ section button:hover {
     }
 
     #small2{
-        top: 150px;
+        top: 170px;
         left: 550px
     }
 
@@ -334,17 +348,18 @@ h1 {
 #formContainer{
     position: absolute;
     top: 120px;
-
+    
 }
 
 #small1{
+    position: absolute;
     top:150px;
-    right: 200px
+    right: 250px
 }
 
 #small2{
-    top: 150px;
-    right: 140px
+    top: 170px;
+    right: 120px
 }
 }
 
@@ -370,7 +385,7 @@ h1 {
 
 @media screen and (max-width: 640px){
     header{
-        height:280px;
+        height:320px;
     }
     #formContainer{
         position: absolute;
@@ -386,12 +401,12 @@ h1 {
     }
 
     #small1{
-        top: 260px;
-        left: 75px
+        top: 280px;
+        left: 100px
     }
 
     #small2{
-        top: 260px;
+        top: 300px;
         left: 225px
 
     }
@@ -404,6 +419,22 @@ h1 {
 }
 
 @media screen and (max-width: 585px){
+
+    header{
+        height:370px
+    }
+
+    #small1{
+        top: 280px;
+        left: 100px
+    }
+
+    #small2{
+        top: 300px;
+        left: 225px
+
+    }
+
     .googleContainer2{
         display: none
     }
