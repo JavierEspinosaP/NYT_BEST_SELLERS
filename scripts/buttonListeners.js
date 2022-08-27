@@ -1223,13 +1223,13 @@ document.getElementById('comeBackButton').addEventListener('click', () => {
     document.getElementById('book3').classList.add('hide')
     document.getElementById('book4').classList.remove('book')
     document.getElementById('book4').classList.add('hide')
-console.log(pageNumber);
+
     if (pageNumber != 4) {
-        document.getElementById('nextButton').classList.remove('hideButton')
+        document.getElementById('nextButton').classList.remove('hide')
         document.getElementById('nextButton').classList.add('showButton')
     }
     if (pageNumber != 0) {
-        document.getElementById('previousButton').classList.remove('hideButton')
+        document.getElementById('previousButton').classList.remove('hide')
         document.getElementById('previousButton').classList.add('showButton')
     }
     document.getElementById('comeBackButton').classList.add('hide')
@@ -1239,6 +1239,11 @@ console.log(pageNumber);
 
     document.getElementById('signUpContainer').classList.remove('signUpContainer')
     document.getElementById('signUpContainer').classList.add('hide')
+
+    document.getElementById('nextButtonFavorites').classList.add('hide')
+    document.getElementById('previousButtonFavorites').classList.add('hide')
+        
+    
 })
 
 

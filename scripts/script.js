@@ -351,6 +351,10 @@ getData()
         document.getElementById('previousButtonFavorites').classList.remove('hide')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
+    document.getElementById('nextButtonBooks').classList.remove('showButton')
+    document.getElementById('nextButtonBooks').classList.add('hide')
+    document.getElementById('previousButtonBooks').classList.remove('showButton')
+    document.getElementById('previousButtonBooks').classList.add('hide')
     
 
 })
