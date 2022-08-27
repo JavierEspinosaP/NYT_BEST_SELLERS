@@ -131,12 +131,16 @@ let userId;
 
 let signInContainer = document.getElementById('formContainer')
 
+let inputEmail;
+  
+let inputPassword;
 
 document.getElementById('formContainer').addEventListener('submit', (event) => {
   event.preventDefault()
 
-  let inputEmail = document.getElementById('inputEmail').value
-  let inputPassword = document.getElementById('inputPassword').value
+
+inputEmail = document.getElementById('inputEmail').value
+inputPassword = document.getElementById('inputPassword').value
 
 
   firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword)
@@ -144,12 +148,17 @@ document.getElementById('formContainer').addEventListener('submit', (event) => {
       if (userCredentials.operationType === "signIn") {
         db.collection("users").get().then(querySnapshot => {
           querySnapshot.docs.map(doc => {
+            let nickname
+            let URLImage
             if (inputEmail == doc.data().email) {
               nickname = doc.data().nickname
               userId = doc.data().id
+              URLImage = doc.data().URLImage
             }
             if (nickname != undefined) {
-              welcomeSection.innerHTML = (`<p>Welcome ${nickname}!</p>`);
+              welcomeSection.innerHTML = (`
+              <img id="currentUserImg" width="50" height="50" style="border-radius:50%; position: absolute; top: 5px; right: 130px" src="${URLImage}">
+              <p>Welcome ${nickname}!</p>`);
             }
             document.getElementById('welcomeSection').classList.remove('hide')
             document.getElementById('welcomeSection').classList.add('welcomeSection')
@@ -166,14 +175,20 @@ document.getElementById('formContainer').addEventListener('submit', (event) => {
         document.getElementById('formContainer').classList.add('hide')
 
 
+
+        document.getElementById('small1').classList.remove('small1')
+        document.getElementById('small1').classList.add('hide')
+
+        document.getElementById('small2').classList.remove('small2')
+        document.getElementById('small2').classList.add('hide')
+        document.getElementById('googleContainer2').classList.remove('googleContainer2')
+        document.getElementById('googleContainer2').classList.add('hide')
+
       }
+
+
     }
     )
-
-
-
-
-
 
 })
 
@@ -247,7 +262,18 @@ document.getElementById('small3').addEventListener('click', (event) => {
 
         document.getElementById('signUpContainer').classList.remove('signUpContainer')
         document.getElementById('signUpContainer').classList.add('hide')
+
+        
+        
+
       }
+
+      document.getElementById('small1').classList.remove('hide')
+      document.getElementById('small1').classList.add('showButton')
+      document.getElementById('small2').classList.remove('hide')
+      document.getElementById('small2').classList.add('showButton')
+
+      
     })
 })
 
@@ -325,5 +351,88 @@ document.getElementById('googleContainer').addEventListener('click', (event) => 
         document.getElementById('signUpContainer').classList.add('hide')
 
       })
+
+      
+  })
+      document.getElementById('favoriteView').classList.remove('hide')
+      document.getElementById('favoriteView').classList.add('favoriteView')
+})
+
+document.getElementById('googleContainer2').addEventListener('click', (event) => {
+  event.preventDefault();
+
+  var provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
+  firebase.auth().signInWithPopup(provider).then(function (result) {
+
+    let user = result.user;
+    let newUser = {
+      email: user.email,
+      id: user.uid,
+      nickname: user.displayName
+    }
+
+    db.collection("users")
+      .where("email", "==", user.email)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.size == 0) {
+          db.collection("users")
+            .add(newUser)
+        }
+
+        console.log(user.uid);
+        welcomeSection.innerHTML = (`<p>Welcome ${user.displayName}!</p>`);
+        document.getElementById('welcomeSection').classList.remove('hide')
+        document.getElementById('welcomeSection').classList.add('welcomeSection')
+
+        document.getElementById('small3').classList.remove('hide')
+        document.getElementById('small3').classList.add('small3')
+
+        document.getElementById('formContainer').classList.remove('formContainer')
+        document.getElementById('formContainer').classList.add('hide')
+
+        document.getElementById('list1').classList.remove('hide')
+        document.getElementById('list1').classList.add('list')
+        document.getElementById('list2').classList.remove('hide')
+        document.getElementById('list2').classList.add('list')
+        document.getElementById('list3').classList.remove('hide')
+        document.getElementById('list3').classList.add('list')
+        document.getElementById('list4').classList.remove('hide')
+        document.getElementById('list4').classList.add('list')
+        document.getElementById('list5').classList.remove('hide')
+        document.getElementById('list5').classList.add('list')
+        document.getElementById('list6').classList.remove('hide')
+        document.getElementById('list6').classList.add('list')
+        document.getElementById('list7').classList.remove('hide')
+        document.getElementById('list7').classList.add('list')
+        document.getElementById('list8').classList.remove('hide')
+        document.getElementById('list8').classList.add('list')
+        document.getElementById('list9').classList.remove('hide')
+        document.getElementById('list9').classList.add('list')
+        document.getElementById('list10').classList.remove('hide')
+        document.getElementById('list10').classList.add('list')
+        document.getElementById('list11').classList.remove('hide')
+        document.getElementById('list11').classList.add('list')
+        document.getElementById('list12').classList.remove('hide')
+        document.getElementById('list12').classList.add('list')
+        if (pageNumber != 4) {
+          document.getElementById('nextButton').classList.remove('hideButton')
+          document.getElementById('nextButton').classList.add('showButton')
+        }
+        if (pageNumber != 0) {
+          document.getElementById('previousButton').classList.remove('hideButton')
+          document.getElementById('previousButton').classList.add('showButton')
+        }
+
+        document.getElementById('signUpContainer').classList.remove('signUpContainer')
+        document.getElementById('signUpContainer').classList.add('hide')
+
+      })
+      document.getElementById('favoriteView').classList.remove('hide')
+      document.getElementById('favoriteView').classList.add('favoriteView')
   })
 })
+
+

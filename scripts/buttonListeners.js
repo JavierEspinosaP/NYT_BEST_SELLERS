@@ -89,8 +89,14 @@ document.getElementById('small2').addEventListener('click', () => {
     document.getElementById('comeBackButton').classList.remove('showButton')
 
 })
+        let arrRanking = []
+        let arrBookNames = [];
+        let arrPictures = [];
+        let arrWeeks = [];
+        let arrParagraph = [];
+        let arrAmazon = [];
 
-
+        
         
 
 document.getElementById('nextButtonFavorites').addEventListener('click', () => {
@@ -152,11 +158,7 @@ document.getElementById('previousButtonFavorites').addEventListener('click', () 
 
     async function getData() {
 
-        let arrBookNames = [];
-        let arrPictures = [];
-        let arrWeeks = [];
-        let arrParagraph = [];
-        let arrAmazon = [];
+
 
 
 
@@ -201,6 +203,7 @@ async function getBooks() {
     let ranking = data.results.books.map((ranking) => {
         return ranking.rank
     })
+
 
 
 
@@ -302,6 +305,8 @@ function changeFavoriteBooks() {
         let arrParagraph = [];
         let arrAmazon = [];
 
+        let userId
+
 
         await db.collection("users").get().then(querySnapshot => {
             querySnapshot.docs.map(doc => {
@@ -315,7 +320,8 @@ function changeFavoriteBooks() {
 
         await db.collection("favorites").get().then(querySnapshot => {
             querySnapshot.docs.map(doc => {
-                if (userId = doc.data().userId) {
+
+                if (userId == doc.data().userId) {
                     arrAmazon.push(doc.data().amazonLink);
                     arrParagraph.push(doc.data().paragraph)
                     arrWeeks.push(doc.data().weeksOnList)
@@ -328,7 +334,8 @@ function changeFavoriteBooks() {
         })
 
 
-        const books = [[0, 4], [4, 8], [8, 12], [12, 15], [15,18], [18,21], [21,24]]
+
+        const books = [[0, 4], [4, 8], [8, 12], [12, 15], [15, 18], [18, 21], [21, 24]]
         let changeBook = books[favoriteNumber]
         let bookPos1 = changeBook[0]
         let bookPos2 = changeBook[1]
@@ -339,7 +346,6 @@ function changeFavoriteBooks() {
             document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
             document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
             document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
-            document.getElementById(`favorites${(i + 1) - bookPos1}`).innerHTML = `<p>Add to favorites</p>`
         }
     }
     getData()

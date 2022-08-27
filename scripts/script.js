@@ -97,19 +97,22 @@ document.getElementById('favorites1').addEventListener('click', () => {
 
     let bookName = document.getElementById(`h3Book1`).innerHTML
 
-    let arrBookNameFind = []  
+    let arrBookNameFind = []
 
     db.collection("favorites").get().then(querySnapshot => {
-     
 
-    querySnapshot.docs.map(doc => {
 
-    arrBookNameFind.push(doc.data().bookName)
+        arrBookNameFind = []
+
+        querySnapshot.docs.map(doc => {
+
+            arrBookNameFind.push(doc.data().bookName)
 
         })
+        console.log(arrBookNameFind);
     })
 
-        let favorites = {
+    let favorites = {
         userId: userId,
         bookName: bookName.slice(3),
         imgBook: document.getElementById(`imgBook1`).innerHTML,
@@ -118,20 +121,17 @@ document.getElementById('favorites1').addEventListener('click', () => {
         amazonLink: document.getElementById(`amazon1`).innerHTML
     }
 
-    if (!arrBookNameFind.indexOf(favorites.bookName) === -1){
-        if (inputEmail == doc.data().email) {
-        nickname = doc.data().nickname
-        userId = doc.data().id
+    if (!arrBookNameFind.includes(favorites.bookName) && favorites.userId == userId) {
 
-        if (userId != undefined) {
+        console.log(favorites.bookName);
+
         db.collection("favorites")
             .add(favorites)
             .then((docRef) => console.log("Document written with ID: ", docRef.id))
             .catch((error) => console.error("Error adding document: ", error));
-        }        
     }
 
-    } else{
+    else {
         console.log("book is already on favorites");
     }
 
@@ -232,65 +232,69 @@ document.getElementById('favorites4').addEventListener('click', () => {
             .catch((error) => console.error("Error adding document: ", error));
     }
 
-})  
+})
 
 // FAVORITES VIEW
 let favoriteNumber = 0
 
-document.getElementById('favoriteView').addEventListener('click', () =>{
-
-async function getData(){
-    
-
-    let arrBookNames = [];
-    let arrPictures = [];
-    let arrWeeks = [];
-    let arrParagraph = [];
-    let arrAmazon = [];
+document.getElementById('favoriteView').addEventListener('click', () => {
 
 
-await db.collection("users").get().then(querySnapshot => {
-        querySnapshot.docs.map(doc => {
-            if (inputEmail == doc.data().email) {
-                nickname = doc.data().nickname
-                userId = doc.data().id
-            }
+
+
+
+    async function getData() {
+
+
+        let arrBookNames = [];
+        let arrPictures = [];
+        let arrWeeks = [];
+        let arrParagraph = [];
+        let arrAmazon = [];
+
+        let userId
+
+
+        await db.collection("users").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {
+                if (inputEmail == doc.data().email) {
+                    nickname = doc.data().nickname
+                    userId = doc.data().id
+                }
+            })
         })
-    })
 
 
-await db.collection("favorites").get().then(querySnapshot => {
-        querySnapshot.docs.map(doc => {
-            if (userId = doc.data().userId) {
-             arrAmazon.push(doc.data().amazonLink); 
-             arrParagraph.push(doc.data().paragraph)  
-             arrWeeks.push(doc.data().weeksOnList)
-             arrPictures.push(doc.data().imgBook) 
-             arrBookNames.push(doc.data().bookName) 
-             
-            }
-            
+        await db.collection("favorites").get().then(querySnapshot => {
+            querySnapshot.docs.map(doc => {
+
+                if (userId == doc.data().userId) {
+                    arrAmazon.push(doc.data().amazonLink);
+                    arrParagraph.push(doc.data().paragraph)
+                    arrWeeks.push(doc.data().weeksOnList)
+                    arrPictures.push(doc.data().imgBook)
+                    arrBookNames.push(doc.data().bookName)
+
+                }
+
+            })
         })
-    })
 
 
-    const books = [[0,4],[4,8],[8,12],[12,15], [15,18], [18,21], [21,24]]
-    let changeBook = books[favoriteNumber]
-    let bookPos1 = changeBook[0]
-    let bookPos2 = changeBook[1]
-    
-    for (let i = bookPos1; i < bookPos2; i++) {
-        document.getElementById(`h3Book${(i+1)-bookPos1}`).innerHTML = arrBookNames[i]
-        document.getElementById(`imgBook${(i+1)-bookPos1}`).innerHTML = arrPictures[i] 
-        document.getElementById(`weeksBook${(i+1)-bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
-        document.getElementById(`pBook${(i+1)-bookPos1}`).innerHTML = arrParagraph[i]
-        document.getElementById(`amazon${(i+1)-bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
-        document.getElementById(`favorites${(i+1)-bookPos1}`).innerHTML = `<p>Add to favorites</p>`      
+        const books = [[0, 4], [4, 8], [8, 12], [12, 15], [15, 18], [18, 21], [21, 24]]
+        let changeBook = books[favoriteNumber]
+        let bookPos1 = changeBook[0]
+        let bookPos2 = changeBook[1]
+
+        for (let i = bookPos1; i < bookPos2; i++) {
+            document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = arrBookNames[i]
+            document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = arrPictures[i]
+            document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
+            document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
+            document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank">Link to Amazon</a>`
         }
-} 
-getData()
-    console.log(favoriteNumber);
-
+    }
+    getData()
 
     document.getElementById('list1').classList.remove('list')
     document.getElementById('list1').classList.add('hide')
@@ -335,19 +339,19 @@ getData()
     document.getElementById('weeksBook1').classList.remove('hide')
     document.getElementById('weeksBook2').classList.remove('hide')
     document.getElementById('weeksBook3').classList.remove('hide')
-    document.getElementById('weeksBook4').classList.remove('hide')    
+    document.getElementById('weeksBook4').classList.remove('hide')
     document.getElementById('pBook1').classList.remove('hide')
     document.getElementById('pBook2').classList.remove('hide')
     document.getElementById('pBook3').classList.remove('hide')
     document.getElementById('pBook4').classList.remove('hide')
     document.getElementById('nextButton').classList.remove('showButton')
-    document.getElementById('nextButton').classList.add('hide') 
+    document.getElementById('nextButton').classList.add('hide')
 
 
-    if (favoriteNumber!=4) {
+    if (favoriteNumber != 4) {
         document.getElementById('nextButtonFavorites').classList.remove('hide')
     }
-    if (favoriteNumber!=0) {
+    if (favoriteNumber != 0) {
         document.getElementById('previousButtonFavorites').classList.remove('hide')
     }
     document.getElementById('comeBackButton').classList.remove('hide')
@@ -355,7 +359,11 @@ getData()
     document.getElementById('nextButtonBooks').classList.add('hide')
     document.getElementById('previousButtonBooks').classList.remove('showButton')
     document.getElementById('previousButtonBooks').classList.add('hide')
-    
+    document.getElementById('favorites1').classList.remove('favorites')
+    document.getElementById('favorites2').classList.remove('favorites')
+    document.getElementById('favorites3').classList.remove('favorites')
+    document.getElementById('favorites4').classList.remove('favorites')
+
 
 })
 
