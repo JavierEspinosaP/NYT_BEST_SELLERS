@@ -52,7 +52,9 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
 
 
   if (signUpPassword === confirmPassword) {
-    firebase.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
+
+    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(signUpEmail) && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(signUpPassword)){
+      firebase.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
       .then(function (result) {
         console.log(result.user.uid);
 
@@ -115,14 +117,58 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
         document.getElementById('small3').classList.remove('hide')
         document.getElementById('small3').classList.add('small3')
 
+
+
         let newParagraph = document.createElement('p')
         welcomeSection.appendChild(newParagraph)
         let message = document.createTextNode(`Welcome ${document.getElementById('nickname').value}!`);
         newParagraph.appendChild(message)
+        Swal.fire({
+          title: `User registered!`,
+          icon: 'success',
+          confirmButtonText: 'Cool!'
+        })
+        db.collection("users").get().then(querySnapshot => {
+          querySnapshot.docs.map(doc => {
+            let nickname
+            let URLImage
+            if (signUpEmail == doc.data().email) {
+              nickname = doc.data().nickname
+              userId = doc.data().id
+              URLImage = doc.data().URLImage
+            }
+            if (nickname != undefined) {
+              welcomeSection.innerHTML = (`
+            <img id="currentUserImg" width="50" height="50" style="border-radius:50%; position: absolute; top: 5px; right: 150px" src="${URLImage}">
+            <p>Welcome ${nickname}!</p>`);
+
+              document.getElementById('favoriteView').classList.remove('hide')
+              document.getElementById('favoriteView').classList.add('favoriteView')
+              document.getElementById('small1').classList.remove('small1')
+              document.getElementById('small1').classList.add('hide')
+
+              document.getElementById('small2').classList.remove('small2')
+              document.getElementById('small2').classList.add('hide')
+
+            }
+          })
+        })
       })
 
+    } else {
+      Swal.fire({
+        title: `Passwords must contain an uppercase letter, a lowercase letter and a number!`,
+        icon: 'error',
+        confirmButtonText: 'Ok...'
+      })
+    }
+    
   } else {
-    alert("las contraseñas deben coincidir")
+    Swal.fire({
+      title: `Passwords dont match!`,
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    })
   }
 })
 
@@ -132,15 +178,15 @@ let userId;
 let signInContainer = document.getElementById('formContainer')
 
 let inputEmail;
-  
+
 let inputPassword;
 
 document.getElementById('formContainer').addEventListener('submit', (event) => {
   event.preventDefault()
 
 
-inputEmail = document.getElementById('inputEmail').value
-inputPassword = document.getElementById('inputPassword').value
+  inputEmail = document.getElementById('inputEmail').value
+  inputPassword = document.getElementById('inputPassword').value
 
 
   firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword)
@@ -263,8 +309,8 @@ document.getElementById('small3').addEventListener('click', (event) => {
         document.getElementById('signUpContainer').classList.remove('signUpContainer')
         document.getElementById('signUpContainer').classList.add('hide')
 
-        
-        
+
+
 
       }
 
@@ -273,8 +319,13 @@ document.getElementById('small3').addEventListener('click', (event) => {
       document.getElementById('small2').classList.remove('hide')
       document.getElementById('small2').classList.add('showButton')
 
-      
+
     })
+  Swal.fire({
+    title: `You're logout!`,
+    icon: 'success',
+    confirmButtonText: 'Thanks'
+  })
 })
 
 //SIGN IN WITH GOOGLE
@@ -352,10 +403,10 @@ document.getElementById('googleContainer').addEventListener('click', (event) => 
 
       })
 
-      
+
   })
-      document.getElementById('favoriteView').classList.remove('hide')
-      document.getElementById('favoriteView').classList.add('favoriteView')
+  document.getElementById('favoriteView').classList.remove('hide')
+  document.getElementById('favoriteView').classList.add('favoriteView')
 })
 
 document.getElementById('googleContainer2').addEventListener('click', (event) => {
@@ -430,8 +481,8 @@ document.getElementById('googleContainer2').addEventListener('click', (event) =>
         document.getElementById('signUpContainer').classList.add('hide')
 
       })
-      document.getElementById('favoriteView').classList.remove('hide')
-      document.getElementById('favoriteView').classList.add('favoriteView')
+    document.getElementById('favoriteView').classList.remove('hide')
+    document.getElementById('favoriteView').classList.add('favoriteView')
   })
 })
 

@@ -129,10 +129,19 @@ document.getElementById('favorites1').addEventListener('click', () => {
             .add(favorites)
             .then((docRef) => console.log("Document written with ID: ", docRef.id))
             .catch((error) => console.error("Error adding document: ", error));
+        Swal.fire({
+            title: 'Book added to your favorites!',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+            })
     }
 
     else {
-        console.log("book is already on favorites");
+        Swal.fire({
+            title: `This book is already on your favorites!`,
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          })
     }
 
 
@@ -167,6 +176,11 @@ document.getElementById('favorites2').addEventListener('click', () => {
             .add(favorites)
             .then((docRef) => console.log("Document written with ID: ", docRef.id))
             .catch((error) => console.error("Error adding document: ", error));
+    Swal.fire({
+        title: 'Book added to your favorites!',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+        })
     }
 
 })
@@ -198,6 +212,11 @@ document.getElementById('favorites3').addEventListener('click', () => {
             .add(favorites)
             .then((docRef) => console.log("Document written with ID: ", docRef.id))
             .catch((error) => console.error("Error adding document: ", error));
+        Swal.fire({
+             title: 'Book added to your favorites!',
+             icon: 'success',
+             confirmButtonText: 'Cool'
+             })
     }
 
 })
@@ -230,6 +249,11 @@ document.getElementById('favorites4').addEventListener('click', () => {
             .add(favorites)
             .then((docRef) => console.log("Document written with ID: ", docRef.id))
             .catch((error) => console.error("Error adding document: ", error));
+        Swal.fire({
+             title: 'Book added to your favorites!',
+             icon: 'success',
+             confirmButtonText: 'Cool'
+         })
     }
 
 })
@@ -286,13 +310,15 @@ document.getElementById('favoriteView').addEventListener('click', () => {
         let bookPos1 = changeBook[0]
         let bookPos2 = changeBook[1]
 
+        console.log(arrAmazon);
+
         for (let i = bookPos1; i < bookPos2; i++) {
             if (arrBookNames[i] != undefined) {
             document.getElementById(`h3Book${(i + 1) - bookPos1}`).innerHTML = arrBookNames[i]
             document.getElementById(`imgBook${(i + 1) - bookPos1}`).innerHTML = arrPictures[i]
             document.getElementById(`weeksBook${(i + 1) - bookPos1}`).innerHTML = "Weeks on list: " + arrWeeks[i]
             document.getElementById(`pBook${(i + 1) - bookPos1}`).innerHTML = arrParagraph[i]
-            document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = `<a href='${arrAmazon[i]}' target="_blank" style="text-decoration:none; color:#fff">Link to Amazon</a>` 
+            document.getElementById(`amazon${(i + 1) - bookPos1}`).innerHTML = arrAmazon[i] 
             }
             else{
                 document.getElementById(`book${(i + 1)}`).classList.remove('book')
@@ -300,7 +326,7 @@ document.getElementById('favoriteView').addEventListener('click', () => {
             }
 
         }
-        if (arrBookNames.length < 4) {
+        if (arrBookNames.length <= 4) {
             document.getElementById('nextButtonFavorites').classList.remove('showButton')
             document.getElementById('nextButtonFavorites').classList.add('hide')
         }
@@ -377,10 +403,12 @@ document.getElementById('favoriteView').addEventListener('click', () => {
     document.getElementById('favorites3').classList.remove('favorites')
     document.getElementById('favorites4').classList.remove('favorites')
     document.getElementById('favorites1').classList.add('hide')
-    document.getElementById('favorites2').classList.remove('hide')
-    document.getElementById('favorites3').classList.remove('hide')
-    document.getElementById('favorites4').classList.remove('hide')
+    document.getElementById('favorites2').classList.add('hide')
+    document.getElementById('favorites3').classList.add('hide')
+    document.getElementById('favorites4').classList.add('hide')
 
 
 })
+
+//ALERTS
 
