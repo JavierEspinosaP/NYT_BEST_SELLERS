@@ -1,4 +1,7 @@
-firebase.firestore();
+firebase.firestore(); //Traemos el método para utilizar Firebase
+
+
+//Eventos de cambio de página para las listas
 
 document.getElementById('nextButton').addEventListener('click', () => {
     pageNumber++
@@ -33,6 +36,8 @@ document.getElementById('previousButton').addEventListener('click', () => {
 let buttonNumber;
 let bookNumber = 0
 
+
+//Evento para entrar en el formulario de registro
 
 document.getElementById('small2').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
@@ -97,7 +102,7 @@ document.getElementById('small2').addEventListener('click', () => {
         let arrAmazon = [];
 
         
-        
+//Eventos de cambio de libros favoritos por cada página
 
 document.getElementById('nextButtonFavorites').addEventListener('click', () => {
 
@@ -137,6 +142,26 @@ document.getElementById('nextButtonFavorites').addEventListener('click', () => {
                 document.getElementById('nextButtonFavorites').classList.remove('showButton')
                 document.getElementById('nextButtonFavorites').classList.add('hide')
             }
+
+            if (arrBookNames.length/4 == (Math.floor(arrBookNames.length/4) + 0.75)) {
+                document.getElementById('book4').classList.remove('book')
+                document.getElementById('book4').classList.add('hide')
+            }
+            if (arrBookNames.length/4 == (Math.floor(arrBookNames.length/4) + 0.50)) {
+                document.getElementById('book4').classList.remove('book')
+                document.getElementById('book4').classList.add('hide')
+                document.getElementById('book3').classList.remove('book')
+                document.getElementById('book3').classList.add('hide')
+            }
+            if (arrBookNames.length/4 == (Math.floor(arrBookNames.length/4) + 0.25)) {
+                document.getElementById('book4').classList.remove('book')
+                document.getElementById('book4').classList.add('hide')
+                document.getElementById('book3').classList.remove('book')
+                document.getElementById('book3').classList.add('hide')
+                document.getElementById('book2').classList.remove('book')
+                document.getElementById('book2').classList.add('hide')
+            }
+
 
            
             
@@ -189,13 +214,24 @@ document.getElementById('previousButtonFavorites').addEventListener('click', () 
         })
     } getData()
 
-
-          
-
     changeFavoriteBooks()
+
+    if (document.getElementById('book4').classList.contains('hide') && document.getElementById('h3Book4').innerHTML != "") {
+        document.getElementById('book4').classList.remove('hide')
+        document.getElementById('book4').classList.add('book')
+    }
+    if (document.getElementById('book3').classList.contains('hide') && document.getElementById('h3Book3').innerHTML != "") {
+        document.getElementById('book3').classList.remove('hide')
+        document.getElementById('book3').classList.add('book')
+    }
+    if (document.getElementById('book2').classList.contains('hide') && document.getElementById('h3Book2').innerHTML != "") {
+        document.getElementById('book2').classList.remove('hide')
+        document.getElementById('book2').classList.add('book')
+    }
+
     })
 
-
+//Funcion para traernos los datos de los libros
 async function getBooks() {
 
     let responselist = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/${listsNames[buttonNumber]}.json?api-key=${key.api_key}`)
@@ -273,6 +309,8 @@ async function getBooks() {
 
 }
 
+
+//Funcion para cambiar de libros cuando cambiamos de página
 function changeBookPages() {
 
     const books = [[0, 4], [4, 8], [8, 12], [12, 15]]
@@ -292,6 +330,8 @@ function changeBookPages() {
     }
 }
 
+
+//Funcion para cambiar los libros favoritos al cambiar de página
 function changeFavoriteBooks() {
 
 
@@ -357,6 +397,8 @@ function changeFavoriteBooks() {
     getData()
 }
 
+//Eventos de cambio de libros por cada página
+
 document.getElementById('nextButtonBooks').addEventListener('click', () => {
     bookNumber++
     if (bookNumber != 0) {
@@ -420,6 +462,9 @@ document.getElementById('previousButtonBooks').addEventListener('click', () => {
     }
     changeBookPages()
 })
+
+
+//Eventos de carga de libros, por cada lista
 
 document.getElementById('list1Button').addEventListener('click', () => {
 
@@ -1025,7 +1070,6 @@ document.getElementById('list8Button').addEventListener('click', () => {
     buttonNumber = (position1 + 7)
 
     getBooks()
-    console.log(arrWeeks);
 })
 document.getElementById('list9Button').addEventListener('click', () => {
     document.getElementById('list1').classList.remove('list')
@@ -1385,6 +1429,9 @@ document.getElementById('comeBackButton').addEventListener('click', () => {
 
     document.getElementById('nextButtonFavorites').classList.add('hide')
     document.getElementById('previousButtonFavorites').classList.add('hide')
+
+    document.getElementById('catFavorite').classList.remove('catFavorite')
+    document.getElementById('catFavorite').classList.add('hide')
         
     
 })

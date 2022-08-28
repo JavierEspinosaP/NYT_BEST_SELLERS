@@ -10,7 +10,7 @@ const createUser = (user) => {
 
   db.collection("users")
     .add(user)
-    .then((docRef) => console.log("Document written with ID: ", docRef.id))
+    .then()
     .catch((error) => console.error("Error adding document: ", error));
 };
 
@@ -18,7 +18,7 @@ const createUser = (user) => {
 const createFavorite = (favorite) => {
   db.collection("favorites")
     .add(favorite)
-    .then((docRef) => console.log("Document written with ID: ", docRef.id))
+    .then()
     .catch((error) => console.error("Error adding document: ", error));
 };
 
@@ -27,7 +27,7 @@ let filePath
 document.getElementById('signUpImage').addEventListener('change', (event) => {
 
   filePath = event.target.files[0]
-  console.log(filePath);
+
 })
 
 
@@ -36,12 +36,14 @@ document.getElementById('signUpImage').addEventListener('change', (event) => {
 document.getElementById('signUpForm').addEventListener('submit', (event) => {
   event.preventDefault();
 
+  //Selectores de los inputs del registo
+
   let signUpEmail = document.getElementById('signUpEmail').value
   let signUpPassword = document.getElementById('signUpPassword').value
   let confirmPassword = document.getElementById('confirmPassword').value
 
 
-
+//Guardado de la imagen
 
   const storageRef = firebase.storage().ref('UserImages/' + signUpEmail + '.jpg')
   storageRef.put(filePath)
@@ -50,13 +52,13 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
 
 
 
-
+// Si ambas contraseñas coinciden en el formulario, se comprueba si cumplen la Regex, si es así, se crea el usuario
   if (signUpPassword === confirmPassword) {
 
     if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(signUpEmail) && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(signUpPassword)){
       firebase.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
       .then(function (result) {
-        console.log(result.user.uid);
+
 
         let imgUrl
         storageRef.getDownloadURL().then(function (url) {
@@ -69,8 +71,6 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
               nickname: document.getElementById('nickname').value,
               URLImage: imgUrl
             });
-
-          console.log(imgUrl);
         })
 
 
@@ -118,7 +118,7 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
         document.getElementById('small3').classList.add('small3')
 
 
-
+        //Se trae la sección "Welcome" y se pinta el nombre de usuario, salta una alerta de "Usuario registrado"
         let newParagraph = document.createElement('p')
         welcomeSection.appendChild(newParagraph)
         let message = document.createTextNode(`Welcome ${document.getElementById('nickname').value}!`);
@@ -128,6 +128,9 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
           icon: 'success',
           confirmButtonText: 'Cool!'
         })
+
+        //Método para traer la URL de la imagen correspondiente al usuario
+
         db.collection("users").get().then(querySnapshot => {
           querySnapshot.docs.map(doc => {
             let nickname
@@ -155,7 +158,7 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
         })
       })
 
-    } else {
+    } else { //Si no pasa la Regex, salta un aviso
       Swal.fire({
         title: `Passwords must contain an uppercase letter, a lowercase letter and a number!`,
         icon: 'error',
@@ -163,7 +166,7 @@ document.getElementById('signUpForm').addEventListener('submit', (event) => {
       })
     }
     
-  } else {
+  } else {// Si no coinciden las contraseñas, salta un aviso
     Swal.fire({
       title: `Passwords dont match!`,
       icon: 'error',
@@ -181,14 +184,18 @@ let inputEmail;
 
 let inputPassword;
 
+
+
 document.getElementById('formContainer').addEventListener('submit', (event) => {
   event.preventDefault()
 
 
+  //Selectores de los inputs del Login
+
   inputEmail = document.getElementById('inputEmail').value
   inputPassword = document.getElementById('inputPassword').value
 
-
+//Autenticación de credenciales
   firebase.auth().signInWithEmailAndPassword(inputEmail, inputPassword)
     .then(userCredentials => {
       if (userCredentials.operationType === "signIn") {
@@ -239,11 +246,12 @@ document.getElementById('formContainer').addEventListener('submit', (event) => {
 })
 
 //LOG OUT
+
 document.getElementById('small3').addEventListener('click', (event) => {
   event.preventDefault();
-  firebase.auth().signOut()
+  firebase.auth().signOut() //Método para desloguearse
     .then(() => {
-      console.log("log out");
+
       document.getElementById('formContainer').classList.remove('hide')
       document.getElementById('formContainer').classList.add('formContainer')
       document.getElementById('welcomeSection').classList.remove('welcomeSection')
@@ -292,7 +300,6 @@ document.getElementById('small3').addEventListener('click', (event) => {
         document.getElementById('book3').classList.add('hide')
         document.getElementById('book4').classList.remove('book')
         document.getElementById('book4').classList.add('hide')
-        console.log(pageNumber);
         if (pageNumber != 4) {
           document.getElementById('nextButton').classList.remove('hideButton')
           document.getElementById('nextButton').classList.add('showButton')
@@ -333,7 +340,7 @@ document.getElementById('small3').addEventListener('click', (event) => {
 document.getElementById('googleContainer').addEventListener('click', (event) => {
   event.preventDefault();
 
-  var provider = new firebase.auth.GoogleAuthProvider();
+  var provider = new firebase.auth.GoogleAuthProvider(); //Método para loguearse con Google
   provider.addScope('profile');
   provider.addScope('email');
   firebase.auth().signInWithPopup(provider).then(function (result) {
@@ -354,7 +361,6 @@ document.getElementById('googleContainer').addEventListener('click', (event) => 
             .add(newUser)
         }
 
-        console.log(user.uid);
         welcomeSection.innerHTML = (`<p>Welcome ${user.displayName}!</p>`);
         document.getElementById('welcomeSection').classList.remove('hide')
         document.getElementById('welcomeSection').classList.add('welcomeSection')
@@ -409,6 +415,8 @@ document.getElementById('googleContainer').addEventListener('click', (event) => 
   document.getElementById('favoriteView').classList.add('favoriteView')
 })
 
+// Sign In con Google desde la página principal
+
 document.getElementById('googleContainer2').addEventListener('click', (event) => {
   event.preventDefault();
 
@@ -433,7 +441,6 @@ document.getElementById('googleContainer2').addEventListener('click', (event) =>
             .add(newUser)
         }
 
-        console.log(user.uid);
         welcomeSection.innerHTML = (`<p>Welcome ${user.displayName}!</p>`);
         document.getElementById('welcomeSection').classList.remove('hide')
         document.getElementById('welcomeSection').classList.add('welcomeSection')

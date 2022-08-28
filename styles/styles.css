@@ -300,6 +300,21 @@ section button:hover {
 
 @media screen and (max-width: 1400px){
 
+    .welcomeSection{
+
+        right: 220px;
+        top: 35px;
+        margin-right: 50px;
+    }
+
+    #favoriteView{
+        top:35px
+    }
+
+    #small3{
+        top: 35px
+    }
+
     header {
         display:block;
         height: 230px;
@@ -335,6 +350,21 @@ section button:hover {
 }
 
 @media screen and (max-width: 1100px){
+
+    .welcomeSection{
+
+        right: 220px;
+        top: 80px;
+        margin-right: 50px;
+    }
+
+    #favoriteView{
+        top:80px
+    }
+
+    #small3{
+        top: 80px
+    }
 
 header {
     height: 230px;
